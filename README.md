@@ -1,6 +1,6 @@
 # 100 Days of SwiftUI
 
-**********\*\***********Up to: Day 7**********\*\***********
+**Up to: Day 9**
 
 ### Notes:
 
@@ -294,7 +294,7 @@ if a {
 }
 ```
 
-- ****************\*\*****************logical operators****************\*\*****************
+- ******\*\*\*\*******\*\*******\*\*\*\*******logical operators******\*\*\*\*******\*\*******\*\*\*\*******
   - `&&` and
   - `||` or
 - Using enums as conditionals
@@ -408,3 +408,209 @@ for filename in filenames {
 ```
 
 - `break` - just wrecks the loop and exits it as soon as it is called
+
+## Functions
+
+```swift
+func nameOfFunction {
+	// do something
+}
+```
+
+Three things to basic functions:
+
+1. The `func` keyword
+2. the name of the function followed by `()`
+3. the body of the function
+
+- To call a function you do `nameOfFunction()`
+  - swift call this the functions \***\*\*\*\***call site,\***\*\*\*\*** in laymans it means a place where the function is called
+
+Writing parameters & arguments
+
+```swift
+func printTimesTables(number: Int) {
+    for i in 1...12 {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(number: 5)
+```
+
+- you give the parameter a name `number` and then an expected type `Int`
+- then when you call it you have to actually use the parameter name and pass it the value so `number: 5`
+
+### Returning values
+
+To return data from a function you need two things
+
+1. An arrow then data type before the opening curly bracket
+2. the `return` keyword
+
+```swift
+func rollDice() -> Int {
+    return Int.random(in: 1...6)
+}
+
+let result = rollDice()
+print(result)
+```
+
+- The above also says the function must return an integer, which I didn’t pick up on during my first pass
+
+Another example returns a `Bool`
+
+```swift
+func areLettersIdentical(string1: String, string2: String) -> Bool {
+    return string1.sorted() == string2.sorted()
+}
+```
+
+- In the above example we don’t even need the `return` keyword because swift is smart enough to know since there is only one line it must return that data **(but only works when single line in func)**
+
+You can use **\*\***\*\***\*\***`return` to force a function to exit early\*\*
+
+### Returning multiple values with tuples
+
+```swift
+func getUser() -> (firstName: String, lastName: String) {
+    (firstName: "Taylor", lastName: "Swift")
+}
+
+let user = getUser()
+print("Name: \(user.firstName) \(user.lastName)")
+```
+
+- the return type is a tuple that contains 2 strings
+- The diff between dictionaries and tuples is that tuples don’t need to know whether the data is present ahead of time or not, so you don’t need to return a default value like you would with a dict.
+  - This is because swift knows ahead of time what is available in a tuple. For instance if you tried to print `user.job` it would tell you the `Value of tuple type '(firstName: String, lastName: String)' has no member 'job'`
+
+Three things worth knowing about tuples that you might see in the wild
+
+1. You might see a the tuple without the names / parameters because swift already knows the name of the parameters and I’m guessing the only thing that matters is order
+
+   ```swift
+   func getUser() -> (firstName: String, lastName: String) {
+       ("Taylor", "Swift")
+   }
+   ```
+
+2. You can also access tuples with indices when they aren’t given names
+
+   ```swift
+   func getUser() -> (String, String) {
+       ("Taylor", "Swift")
+   }
+
+   let user = getUser()
+   print("Name: \(user.0) \(user.1)")
+   ```
+
+3. Tuples have a similar thing to destructuring in javascript, you just pass the names inside of parentheses and they you can call those variables.
+
+   ```swift
+   let (firstName, lastName) = getUser()
+   print("Name: \(firstName) \(lastName)")
+   ```
+
+### Customizing parameter labels
+
+\*_this is semi important I see this syntax all over the place and didn’t understand it until now_
+
+- Swift gives us two ways we can customize parameter labels:
+
+  1. we can use the `_` for the external name, meaning it doesn’t get used
+
+     ```swift
+     func isUppercase(string: String) -> Bool {
+         string == string.uppercased()
+     }
+
+     let string = "HELLO, WORLD"
+     let result = isUppercase(string: string)
+
+     // vs
+
+     func isUppercase(_ string: String) -> Bool {
+         string == string.uppercased()
+     }
+
+     let string = "HELLO, WORLD"
+     let result = isUppercase(string)
+     ```
+
+     - Notice in the second example, we don’t need to use the external parameter label. **It is optional.**
+     - \*NB: External parameter is the parameter that is used when calling the function, so above the external parameter name is `_` and below it is `for`
+
+  2. we can add a second parameter name so that we have both internal and external names
+
+     ```swift
+     func printTimesTables(for number: Int) {
+         for i in 1...12 {
+             print("\(i) x \(number) is \(i * number)")
+         }
+     }
+
+     printTimesTables(for: 5)
+     ```
+
+     - here the external name is `for` and the internal name is `number` that is type int
+     - when we call the function we use the external name parameter because it reads more human “print times tables for 5” vas. “print times table for number 5”. Five is already a number dummy.
+
+### Default parameter values
+
+- You can specify default values when you set the parameters of a function, similar to JS
+
+```swift
+func printTimesTables(for number: Int, end: Int = 12) {
+    for i in 1...end {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(for: 5, end: 20)
+printTimesTables(for: 8)
+```
+
+- best practice is to try to adhere to using sensible defaults that the user would expect
+
+### Handling errors
+
+- You can use `throw`
+
+```swift
+func checkPassword(_ password: String) throws -> String {
+    if password.count < 5 {
+        throw PasswordError.short
+    }
+
+    if password == "12345" {
+        throw PasswordError.obvious
+    }
+
+    if password.count < 8 {
+        return "OK"
+    } else if password.count < 10 {
+        return "Good"
+    } else {
+        return "Excellent"
+    }
+}
+```
+
+- Another way to handle errors in functions is with a essentially a try catch block you’d use in JS. Except it is a `do`, `try`, `catch` block I think.
+
+  ```swift
+  let string = "12345"
+
+  do {
+      let result = try checkPassword(string)
+      print("Password rating: \(result)")
+  } catch {
+      print("There was an error.")
+  }
+  ```
+
+  - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
+  - `try` has to be inside a `do` block.
