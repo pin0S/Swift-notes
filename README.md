@@ -1,6 +1,6 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 9**
+\***\*\*\*\*\***\*\*\***\*\*\*\*\***Up to: Day 10\***\*\*\*\*\***\*\*\***\*\*\*\*\***
 
 ### Notes:
 
@@ -294,7 +294,7 @@ if a {
 }
 ```
 
-- ******\*\*\*\*******\*\*******\*\*\*\*******logical operators******\*\*\*\*******\*\*******\*\*\*\*******
+- **\*\***\*\*\*\***\*\***\*\***\*\***\*\*\*\***\*\***logical operators**\*\***\*\*\*\***\*\***\*\***\*\***\*\*\*\***\*\***
   - `&&` and
   - `||` or
 - Using enums as conditionals
@@ -614,3 +614,170 @@ func checkPassword(_ password: String) throws -> String {
 
   - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
   - `try` has to be inside a `do` block.
+
+## Closures
+
+You can assign functions directly to variables, and we call that a closure
+
+```swift
+let sayHello = {
+    print("Hi there!")
+}
+
+sayHello()
+```
+
+- If you want a closure to except parameters you need to declare them inside the `{}` curly braces.
+
+  ```swift
+  let sayHello = { (name: String) -> String in
+      "Hi \(name)!"
+  }
+  ```
+
+  - here you have declared the parameter `name` with the type `String`
+  - told swift the return value is a `String`
+  - Then used the keyword `in`
+
+- `in` is used to mark the end of the parameters and return type in a closure
+
+You don’t need to to give a closure a return type, the below is valid because it is a `Void` type, that is it returns nothing
+
+```swift
+var cleanRoom = { (name: String) in
+	print("I'm cleaning the \(name).")
+}
+cleanRoom("kitchen")
+```
+
+The thing to recognize with closures it that they start by assigning a variable and use the **`{}`.**
+
+- You’ll see ones that don’t pass the parameter types or a return value:
+
+  ```swift
+  let captainFirstTeam = team.sorted { name1, name2 in
+      if name1 == "Suzanne" {
+          return true
+      } else if name2 == "Suzanne" {
+          return false
+      }
+
+      return name1 < name2
+  } ****
+  ```
+
+- Ones that you don’t even need to even pass a parameter:
+
+  ```swift
+  let captainFirstTeam = team.sorted {
+      if $0 == "Suzanne" {
+          return true
+      } else if $1 == "Suzanne" {
+          return false
+      }
+
+      return $0 < $1
+  }
+  ```
+
+- Ones where you don’t use a return
+
+  ```swift
+  let reverseTeam = team.sorted { $0 > $1 }
+  ```
+
+## Structs
+
+Swift’s structs let us create our own custom, complex data types, complete with their own variables and their own functions.
+
+```swift
+struct Album {
+    let title: String
+    let artist: String
+    let year: Int
+
+    func printSummary() {
+        print("\(title) (\(year)) by \(artist)")
+    }
+}
+
+let red = Album(title: "Red", artist: "Taylor Swift", year: 2012)
+let wings = Album(title: "Wings", artist: "BTS", year: 2016)
+
+print(red.title)
+print(wings.artist)
+
+red.printSummary()
+wings.printSummary()
+```
+
+- This creates a new type called Album
+  - It has three constants - `title`, `artist`, `year`
+    - A simple function `printSummary`
+
+Structs have to use CamelCase, but inside we use camelCase (is that right? surely these have individual names, someone please leave a comment)
+
+- When you create a new instance of a struct you need to **provide values for each of the constants in the order they were defined.** So above I couldn’t go `let red = Album(year: 2012, title: "Red", artist: "Taylor Swift"`)
+
+If you create a struct using a constant like above, swift makes the struct and all of its data constant meaning we can’t reassign it. The below is an example of where this would be a problem:
+
+```swift
+struct Employee {
+    let name: String
+    var vacationRemaining: Int
+
+    func takeVacation(days: Int) {
+        if vacationRemaining > days {
+            vacationRemaining -= days
+            print("I'm going on vacation!")
+            print("Days remaining: \(vacationRemaining)")
+        } else {
+            print("Oops! There aren't enough days remaining.")
+        }
+    }
+}
+
+let archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
+archer.takeVacation(days: 5)
+print(archer.vacationRemaining)
+```
+
+- This doesn’t work because the function isn’t allowed to change the struct’s data because we made it constant.
+- To fix this we can add the `mutating` keyword in front of the func and create the `archer` struct as a variable
+
+```swift
+struct Employee {
+    let name: String
+    var vacationRemaining: Int
+
+    mutating func takeVacation(days: Int) {
+        if vacationRemaining > days {
+            vacationRemaining -= days
+            print("I'm going on vacation!")
+            print("Days remaining: \(vacationRemaining)")
+        } else {
+            print("Oops! There aren't enough days remaining.")
+        }
+    }
+}
+
+var archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
+archer.takeVacation(days: 5)
+print(archer.vacationRemaining)
+```
+
+- But if we change archer to a constant it won’t work again because we’re trying to call a `mutating` function on a constant struct, which isn’t allowed.
+
+### Important struct terminology
+
+- Variables and constants that belong to structs are called *properties*.
+- Functions that belong to structs are called *methods*.
+- When we create a constant or variable out of a struct, we call that an *instance* – you might create a dozen unique instances of the **`Album`** struct, for example.
+- When we create instances of structs we do so using an *initializer* like this: **`Album(title: "Wings", artist: "BTS", year: 2016)`**.
+
+  - Swift silently creates a special function inside the struct called **`init()`**, using all the properties of the struct as its parameters. It then automatically treats these two pieces of code as being the same:
+
+    ```swift
+    var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
+    var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
+    ```
