@@ -1,6 +1,8 @@
 # 100 Days of SwiftUI
 
-\***\*\*\*\*\***\*\*\***\*\*\*\*\***Up to: Day 10\***\*\*\*\*\***\*\*\***\*\*\*\*\***
+# 100 Days of SwiftUI
+
+**Up to: Day 13**
 
 ### Notes:
 
@@ -294,7 +296,7 @@ if a {
 }
 ```
 
-- **\*\***\*\*\*\***\*\***\*\***\*\***\*\*\*\***\*\***logical operators**\*\***\*\*\*\***\*\***\*\***\*\***\*\*\*\***\*\***
+- ****************\*\*****************logical operators****************\*\*****************
   - `&&` and
   - `||` or
 - Using enums as conditionals
@@ -424,7 +426,7 @@ Three things to basic functions:
 3. the body of the function
 
 - To call a function you do `nameOfFunction()`
-  - swift call this the functions \***\*\*\*\***call site,\***\*\*\*\*** in laymans it means a place where the function is called
+  - swift call this the functions ****\*****call site,****\***** in laymans it means a place where the function is called
 
 Writing parameters & arguments
 
@@ -469,7 +471,7 @@ func areLettersIdentical(string1: String, string2: String) -> Bool {
 
 - In the above example we don’t even need the `return` keyword because swift is smart enough to know since there is only one line it must return that data **(but only works when single line in func)**
 
-You can use **\*\***\*\***\*\***`return` to force a function to exit early\*\*
+You can use ******\*\*******`return` to force a function to exit early\*\*
 
 ### Returning multiple values with tuples
 
@@ -715,7 +717,7 @@ wings.printSummary()
   - It has three constants - `title`, `artist`, `year`
     - A simple function `printSummary`
 
-Structs have to use CamelCase, but inside we use camelCase (is that right? surely these have individual names, someone please leave a comment)
+Structs have to use CamalCase, but inside we use camalCase (is that right? surely these have individual names, someone please leave a comment)
 
 - When you create a new instance of a struct you need to **provide values for each of the constants in the order they were defined.** So above I couldn’t go `let red = Album(year: 2012, title: "Red", artist: "Taylor Swift"`)
 
@@ -781,3 +783,206 @@ print(archer.vacationRemaining)
     var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
     var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
     ```
+
+### Computed & Stored Properties
+
+- Structs have two type of properties:
+
+  1. a stored property, a variable / constant that holds a piece of data inside the struct so above a stored prop would be `name` or `vacationRemaining`
+  2. a computed property, calculates the value of a property each time it is accessed
+
+     ```swift
+     struct Employee {
+         let name: String
+         var vacationAllocated = 14
+         var vacationTaken = 0
+
+         var vacationRemaining: Int {
+             vacationAllocated - vacationTaken
+         }
+     }
+     ```
+
+     - The vacationRemaining is a computed property
+
+- With computed properties you can use getters and setters. Below would be an example:
+
+  ```swift
+  var vacationRemaining: Int {
+      get {
+          vacationAllocated - vacationTaken
+      }
+
+      set {
+          vacationAllocated = vacationTaken + newValue
+      }
+  }
+  ```
+
+  - by the looks you can use the `newValue` keyword to store the value the user was trying to assign to the property. So if you say `archer.vacationRemaining = 30`, then the newValue is `30`
+
+- computed properties must also have a specific type and **can’t be constants**
+- computed properties must also return a value, they can’t just print a string for instance
+
+### Custom initializers
+
+You can create your own custom initializers in swift, there is only one thing your really need to know aside from the syntax and that is all properties must have a value by the time the initializer ends otherwise Swift would refuse to build our code.
+
+```swift
+struct Player {
+    let name: String
+    let number: Int
+
+    init(name: String) {
+        self.name = name
+        number = Int.random(in: 1...99)
+    }
+}
+```
+
+- Above we use the `init` keyword, and pass it the param name.
+  - we then initialize the name param with `self.name = name` and then set the number property to a random number btw 1 and 99
+  - this works because we have given all properties values by the time the initializer ends (properties being `name` and `number`) at the top of the struct.
+
+### Access Control
+
+- Use **`private`** for “don’t let anything outside the struct use this.”
+- Use **`fileprivate`** for “don’t let anything outside the current file use this.”
+- Use **`public`** for “let anyone, anywhere use this.”
+- **`private(set)`** “let anyone read this property, but only let my methods write it.”
+
+### Static Properties & methods
+
+- These can be accessed anywhere in your program.
+- Really useful for sample data for when you are building your application
+- Or for things that are going to be static that you might use throughout your application like you “privacy & terms url” or your apps version number
+
+```swift
+struct AppData {
+    static let version = "1.3 beta 2"
+    static let saveFilename = "settings.json"
+    static let homeURL = "https://www.hackingwithswift.com"
+}
+```
+
+Example of how to use for static sample data
+
+```swift
+struct Employee {
+let username: String
+let password: String
+
+staticlet example = Employee(username: "cfederighi", password: "hairforceone")
+}
+```
+
+## Classes
+
+```swift
+class BoardGame {
+var name: String
+var minimumPlayers = 1
+var maximumPlayers = 4
+init(name: String) {
+self.name = name
+	}
+}
+```
+
+- all copies of a class instance share the same data, meaning that any changes you make to one copy will automatically change the other copies. This happens because classes are *reference types* in Swift, which means all copies of a class all *refer* back to the same underlying pot of data.
+
+### Differences between classes and structs
+
+- First, classes can inherit from other classes, which means they get access to the properties and methods of their parent class. You can optionally override methods in child classes if you want, or mark a class as being **`final`** to stop others subclassing it.
+- Second, Swift doesn’t generate a memberwise initializer for classes, so you need to do it yourself. If a subclass has its own initializer, it must always call the parent class’s initializer at some point.
+- Third, if you create a class instance then take copies of it, all those copies point back to the same instance. This means changing some data in one of the copies changes them all.
+- Fourth, classes can have deinitializers that run when the last copy of one instance is destroyed.
+- Finally, variable properties inside class instances can be changed regardless of whether the instance itself was created as variable.
+
+### Inheritance
+
+- You use a colon `:` to create inheritance in swiftui
+
+```swift
+class Employee {
+    let hours: Int
+
+    init(hours: Int) {
+        self.hours = hours
+    }
+
+		func printSummary() {
+	    print("I work \(hours) hours a day.")
+		}
+}
+
+class Developer: Employee {
+    func work() {
+        print("I'm writing code for \(hours) hours.")
+    }
+}
+
+class Manager: Employee {
+    func work() {
+        print("I'm going to meetings for \(hours) hours.")
+    }
+}
+
+let robert = Developer(hours: 8)
+let joseph = Manager(hours: 10)
+robert.work()
+joseph.work()
+robert.printSummary()
+```
+
+- To change parent method you need to use the `overrider` keyword down on the child method
+
+```swift
+class Developer: Employee {
+    func work() {
+        print("I'm writing code for \(hours) hours.")
+    }
+
+	override func printSummary() {
+	    print("I'm a developer who will sometimes work \(hours) hours a day, but other times spend hours arguing about whether code should be indented using tabs or spaces.")
+	}
+}
+
+```
+
+- If you know for sure that your class should not support inheritance, you can mark it as **`final`**
+  . This means the class itself can inherit from other things, but can’t be used to inherit *from*
+   – no child class can use a final class as its parent.
+
+### Adding initializers for classes
+
+Say you have a class:
+
+```swift
+class Vehicle {
+    let isElectric: Bool
+
+    init(isElectric: Bool) {
+        self.isElectric = isElectric
+    }
+}
+```
+
+Now if you have a `Car` class that inherits from `Vehicle`, swift will refuse to build that class unless you tell it what the values for `isElectric` are.
+
+- To do that we use `super`, when we initialize any instances of the child class
+
+```swift
+class Car: Vehicle {
+    let isConvertible: Bool
+
+    init(isElectric: Bool, isConvertible: Bool) {
+        self.isConvertible = isConvertible
+        super.init(isElectric: isElectric)
+    }
+}
+
+let teslaX = Car(isElectric: true, isConvertible: false)
+```
+
+## Protocols and Extensions
