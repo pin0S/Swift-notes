@@ -1,12 +1,10 @@
 # 100 Days of SwiftUI
 
-# 100 Days of SwiftUI
-
 **Up to: Day 13**
 
 ### Notes:
 
-\*removed days, so I can better put data into categories.
+*removed days, so I can better put data into categories.
 
 ## Fun facts
 
@@ -27,7 +25,7 @@ print(lyric)
 - `let` is a constant - meaning this is a value can’t change
 
 ```swift
-let manger = "Michael Scott"
+let manger = "Michael Scott" 
 var assistantManger = "Dwight Schrute"
 ```
 
@@ -38,17 +36,17 @@ var assistantManger = "Dwight Schrute"
 
 ```swift
 """
-This is a
+This is a 
 multi-line
 string
 """
 ```
 
-Some useful methods:
+Some useful methods: 
 
 ```swift
-someString.uppercased()
-someString.count
+someString.uppercased() 
+someString.count 
 someString.hasPrefix("Mr")
 someString.hasSuffix(".png")
 
@@ -63,7 +61,7 @@ let first = "Luffy"
 let middle = "D"
 let last = "Monkey"
 
-let full = first + " " + middle + ". " + last
+let full = first + " " + middle + ". " + last 
 ```
 
 **Interpolation**
@@ -158,7 +156,7 @@ var albums = ["stringArray"]
 ### Dictionaries
 
 - I think these are like Objects in JS, except they confusingly use the same syntax as an array `[]`
-  - same key, value pair setup (key on left, value on right)
+    - same key, value pair setup (key on left, value on right)
 
 ```swift
 let olympics = [
@@ -178,15 +176,14 @@ heights["LeBron James"] = 206
 ```
 
 - Swift wants you to give default values in case there is nothing there, otherwise it complains `Expression implicitly coerced from 'String?' to 'Any'`
-
-  - to fix we give it what it wants, a default value:
-
-  ```swift
-  print(heights["Yao Ming", default: 0])
-  print(heights["Shaquille O'Neal", default: 0])
-  print(heights["LeBron James", default: 0])
-  ```
-
+    - to fix we give it what it wants, a default value:
+    
+    ```swift
+    print(heights["Yao Ming", default: 0])
+    print(heights["Shaquille O'Neal", default: 0])
+    print(heights["LeBron James", default: 0])
+    ```
+    
 - You can reassign values in a dictionary like so:
 
 ```swift
@@ -206,7 +203,7 @@ let people = Set(["Denzel Washington", "Tom Cruise", "Nicolas Cage", "Samuel L J
 - These don’t care about order
 - Sets are way faster than arrays for lookups so they can be really useful for that
 
-\*_Note: added concatenation & interpolation to strings section_
+**Note: added concatenation & interpolation to strings section*
 
 ### Enums
 
@@ -250,7 +247,7 @@ var futureCrew: [String] = [String]()
 ```
 
 - If you don’t provide initial data for swift to infer the type then you need to let it know the type e.g. `var teams: [String] = [String]()`
-  - You need to provide the parentheses `()` when making empty arrays, dicts and sets
+    - You need to provide the parentheses `()` when making empty arrays, dicts and sets
 - Better way to explicitly tell swift type
 
 ```swift
@@ -260,20 +257,20 @@ var clues = [String]()
 ## Conditions
 
 - if
-
-  ```swift
-  if score > 80 {
-  	print("Condition Met")
-  }
-  ```
-
+    
+    ```swift
+    if score > 80 {
+    	print("Condition Met")
+    }
+    ```
+    
 - comparison operators:
-  - `==` is equal to
-  - `!=` not equal to
-  - `>=`
-  - `<=`
-  - `<`
-  - `>`
+    - `==` is equal to
+    - `!=` not equal to
+    - `>=`
+    - `<=`
+    - `<`
+    - `>`
 - **if else**
 
 ```swift
@@ -296,11 +293,11 @@ if a {
 }
 ```
 
-- ****************\*\*****************logical operators****************\*\*****************
-  - `&&` and
-  - `||` or
+- **********************************logical operators**********************************
+    - `&&` and
+    - `||` or
 - Using enums as conditionals
-  - interesting how you only need to use the `.value` syntax rather than `enumName.value`
+    - interesting how you only need to use the `.value` syntax rather than `enumName.value`
 
 ```swift
 enum TransportOption {
@@ -334,15 +331,15 @@ case .snow:
     print("School is cancelled.")
 case .unknown:
     print("Our forecast generator is broken!")
-default:
+default: 
 	print("It's Melbourne you stuffed")
 }
 ```
 
 - All **`switch`** statements *must* be exhaustive, meaning that all possible values must be handled in there so you can’t leave one off by accident. Hence why we have a `default`.
-  - Order matters, because it goes through from top to bottom so you want `default` at the end
+    - Order matters, because it goes through from top to bottom so you want `default` at the end
 - Swift will execute the first case that matches the condition you’re checking, but no more. Unlike JS where you need to have a break otherwise it will carry on executing other code from all subsequent cases.
-  - If you want it to keep going you can use `fallthrough` keyword, you just put it at the end of the case (above the would mean below the print statement).
+    - If you want it to keep going you can use `fallthrough` keyword, you just put it at the end of the case (above the would mean below the print statement).
 
 ### Ternary
 
@@ -352,7 +349,7 @@ default:
 let canVote = age >= 18 ? "Yes" : "No"
 ```
 
-\*Cool little way to remember how ternaries work from the course **\*\***WTF = what, true, false**\*\***
+*Cool little way to remember how ternaries work from the course ******WTF = what, true, false******
 
 ## Loops
 
@@ -419,16 +416,16 @@ func nameOfFunction {
 }
 ```
 
-Three things to basic functions:
+Three things to basic functions: 
 
 1. The `func` keyword
 2. the name of the function followed by `()`
 3. the body of the function
 
 - To call a function you do `nameOfFunction()`
-  - swift call this the functions ****\*****call site,****\***** in laymans it means a place where the function is called
+    - swift call this the functions *********call site,********* in laymans it means a place where the function is called
 
-Writing parameters & arguments
+Writing parameters & arguments 
 
 ```swift
 func printTimesTables(number: Int) {
@@ -471,7 +468,7 @@ func areLettersIdentical(string1: String, string2: String) -> Bool {
 
 - In the above example we don’t even need the `return` keyword because swift is smart enough to know since there is only one line it must return that data **(but only works when single line in func)**
 
-You can use ******\*\*******`return` to force a function to exit early\*\*
+You can use **************`return` to force a function to exit early**
 
 ### Returning multiple values with tuples
 
@@ -486,79 +483,78 @@ print("Name: \(user.firstName) \(user.lastName)")
 
 - the return type is a tuple that contains 2 strings
 - The diff between dictionaries and tuples is that tuples don’t need to know whether the data is present ahead of time or not, so you don’t need to return a default value like you would with a dict.
-  - This is because swift knows ahead of time what is available in a tuple. For instance if you tried to print `user.job` it would tell you the `Value of tuple type '(firstName: String, lastName: String)' has no member 'job'`
+    - This is because swift knows ahead of time what is available in a tuple. For instance if you tried to print `user.job` it would tell you the `Value of tuple type '(firstName: String, lastName: String)' has no member 'job'`
 
 Three things worth knowing about tuples that you might see in the wild
 
 1. You might see a the tuple without the names / parameters because swift already knows the name of the parameters and I’m guessing the only thing that matters is order
-
-   ```swift
-   func getUser() -> (firstName: String, lastName: String) {
-       ("Taylor", "Swift")
-   }
-   ```
-
+    
+    ```swift
+    func getUser() -> (firstName: String, lastName: String) {
+        ("Taylor", "Swift")
+    }
+    ```
+    
 2. You can also access tuples with indices when they aren’t given names
-
-   ```swift
-   func getUser() -> (String, String) {
-       ("Taylor", "Swift")
-   }
-
-   let user = getUser()
-   print("Name: \(user.0) \(user.1)")
-   ```
-
-3. Tuples have a similar thing to destructuring in javascript, you just pass the names inside of parentheses and they you can call those variables.
-
-   ```swift
-   let (firstName, lastName) = getUser()
-   print("Name: \(firstName) \(lastName)")
-   ```
+    
+    ```swift
+    func getUser() -> (String, String) {
+        ("Taylor", "Swift")
+    }
+    
+    let user = getUser()
+    print("Name: \(user.0) \(user.1)")
+    ```
+    
+3. Tuples have a similar thing to destructuring in javascript, you just pass the  names inside of parentheses and they you can call those variables. 
+    
+    ```swift
+    let (firstName, lastName) = getUser()
+    print("Name: \(firstName) \(lastName)")
+    ```
+    
 
 ### Customizing parameter labels
 
-\*_this is semi important I see this syntax all over the place and didn’t understand it until now_
+**this is semi important I see this syntax all over the place and didn’t understand it until now*
 
 - Swift gives us two ways we can customize parameter labels:
-
-  1. we can use the `_` for the external name, meaning it doesn’t get used
-
-     ```swift
-     func isUppercase(string: String) -> Bool {
-         string == string.uppercased()
-     }
-
-     let string = "HELLO, WORLD"
-     let result = isUppercase(string: string)
-
-     // vs
-
-     func isUppercase(_ string: String) -> Bool {
-         string == string.uppercased()
-     }
-
-     let string = "HELLO, WORLD"
-     let result = isUppercase(string)
-     ```
-
-     - Notice in the second example, we don’t need to use the external parameter label. **It is optional.**
-     - \*NB: External parameter is the parameter that is used when calling the function, so above the external parameter name is `_` and below it is `for`
-
-  2. we can add a second parameter name so that we have both internal and external names
-
-     ```swift
-     func printTimesTables(for number: Int) {
-         for i in 1...12 {
-             print("\(i) x \(number) is \(i * number)")
-         }
-     }
-
-     printTimesTables(for: 5)
-     ```
-
-     - here the external name is `for` and the internal name is `number` that is type int
-     - when we call the function we use the external name parameter because it reads more human “print times tables for 5” vas. “print times table for number 5”. Five is already a number dummy.
+    1. we can use the `_` for the external name, meaning it doesn’t get used
+        
+        ```swift
+        func isUppercase(string: String) -> Bool {
+            string == string.uppercased()
+        }
+        
+        let string = "HELLO, WORLD"
+        let result = isUppercase(string: string)
+        
+        // vs 
+        
+        func isUppercase(_ string: String) -> Bool {
+            string == string.uppercased()
+        }
+        
+        let string = "HELLO, WORLD"
+        let result = isUppercase(string)
+        ```
+        
+        - Notice in the second example, we don’t need to use the external parameter label. **It is optional.**
+        - *NB: External parameter is the parameter that is used when calling the function, so above the external parameter name is `_` and below it is `for`
+    2. we can add a second parameter name so that we have both internal and external names
+        
+        ```swift
+        func printTimesTables(for number: Int) {
+            for i in 1...12 {
+                print("\(i) x \(number) is \(i * number)")
+            }
+        }
+        
+        printTimesTables(for: 5)
+        ```
+        
+        - here the external name is `for` and the internal name is `number` that is type int
+        - when we call the function we use the external name parameter because it reads more human “print times tables for 5” vas. “print times table for number 5”. Five is already a number dummy.
 
 ### Default parameter values
 
@@ -602,20 +598,20 @@ func checkPassword(_ password: String) throws -> String {
 ```
 
 - Another way to handle errors in functions is with a essentially a try catch block you’d use in JS. Except it is a `do`, `try`, `catch` block I think.
-
-  ```swift
-  let string = "12345"
-
-  do {
-      let result = try checkPassword(string)
-      print("Password rating: \(result)")
-  } catch {
-      print("There was an error.")
-  }
-  ```
-
-  - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
-  - `try` has to be inside a `do` block.
+    
+    ```swift
+    let string = "12345"
+    
+    do {
+        let result = try checkPassword(string)
+        print("Password rating: \(result)")
+    } catch {
+        print("There was an error.")
+    }
+    ```
+    
+    - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
+    - `try` has to be inside a `do` block.
 
 ## Closures
 
@@ -630,17 +626,16 @@ sayHello()
 ```
 
 - If you want a closure to except parameters you need to declare them inside the `{}` curly braces.
-
-  ```swift
-  let sayHello = { (name: String) -> String in
-      "Hi \(name)!"
-  }
-  ```
-
-  - here you have declared the parameter `name` with the type `String`
-  - told swift the return value is a `String`
-  - Then used the keyword `in`
-
+    
+    ```swift
+    let sayHello = { (name: String) -> String in
+        "Hi \(name)!"
+    }
+    ```
+    
+    - here you have declared the parameter `name` with the type `String`
+    - told swift the return value is a `String`
+    - Then used the keyword `in`
 - `in` is used to mark the end of the parameters and return type in a closure
 
 You don’t need to to give a closure a return type, the below is valid because it is a `Void` type, that is it returns nothing
@@ -655,38 +650,39 @@ cleanRoom("kitchen")
 The thing to recognize with closures it that they start by assigning a variable and use the **`{}`.**
 
 - You’ll see ones that don’t pass the parameter types or a return value:
-
-  ```swift
-  let captainFirstTeam = team.sorted { name1, name2 in
-      if name1 == "Suzanne" {
-          return true
-      } else if name2 == "Suzanne" {
-          return false
-      }
-
-      return name1 < name2
-  } ****
-  ```
-
+    
+    ```swift
+    let captainFirstTeam = team.sorted { name1, name2 in
+        if name1 == "Suzanne" {
+            return true
+        } else if name2 == "Suzanne" {
+            return false
+        }
+    
+        return name1 < name2
+    } ****
+    ```
+    
 - Ones that you don’t even need to even pass a parameter:
-
-  ```swift
-  let captainFirstTeam = team.sorted {
-      if $0 == "Suzanne" {
-          return true
-      } else if $1 == "Suzanne" {
-          return false
-      }
-
-      return $0 < $1
-  }
-  ```
-
+    
+    ```swift
+    let captainFirstTeam = team.sorted {
+        if $0 == "Suzanne" {
+            return true
+        } else if $1 == "Suzanne" {
+            return false
+        }
+    
+        return $0 < $1
+    }
+    ```
+    
 - Ones where you don’t use a return
-
-  ```swift
-  let reverseTeam = team.sorted { $0 > $1 }
-  ```
+    
+    ```swift
+    let reverseTeam = team.sorted { $0 > $1 }
+    ```
+    
 
 ## Structs
 
@@ -714,14 +710,14 @@ wings.printSummary()
 ```
 
 - This creates a new type called Album
-  - It has three constants - `title`, `artist`, `year`
-    - A simple function `printSummary`
+    - It has three constants - `title`, `artist`, `year`
+        - A simple function `printSummary`
 
 Structs have to use CamalCase, but inside we use camalCase (is that right? surely these have individual names, someone please leave a comment)
 
 - When you create a new instance of a struct you need to **provide values for each of the constants in the order they were defined.** So above I couldn’t go `let red = Album(year: 2012, title: "Red", artist: "Taylor Swift"`)
 
-If you create a struct using a constant like above, swift makes the struct and all of its data constant meaning we can’t reassign it. The below is an example of where this would be a problem:
+If you create a struct using a constant like above, swift makes the struct and all of its data constant meaning we can’t reassign it. The below is an example of where this would be a problem: 
 
 ```swift
 struct Employee {
@@ -741,7 +737,7 @@ struct Employee {
 
 let archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
 archer.takeVacation(days: 5)
-print(archer.vacationRemaining)
+print(archer.vacationRemaining) 
 ```
 
 - This doesn’t work because the function isn’t allowed to change the struct’s data because we made it constant.
@@ -765,7 +761,7 @@ struct Employee {
 
 var archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
 archer.takeVacation(days: 5)
-print(archer.vacationRemaining)
+print(archer.vacationRemaining) 
 ```
 
 - But if we change archer to a constant it won’t work again because we’re trying to call a `mutating` function on a constant struct, which isn’t allowed.
@@ -776,51 +772,48 @@ print(archer.vacationRemaining)
 - Functions that belong to structs are called *methods*.
 - When we create a constant or variable out of a struct, we call that an *instance* – you might create a dozen unique instances of the **`Album`** struct, for example.
 - When we create instances of structs we do so using an *initializer* like this: **`Album(title: "Wings", artist: "BTS", year: 2016)`**.
-
-  - Swift silently creates a special function inside the struct called **`init()`**, using all the properties of the struct as its parameters. It then automatically treats these two pieces of code as being the same:
-
-    ```swift
-    var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
-    var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
-    ```
+    - Swift silently creates a special function inside the struct called **`init()`**, using all the properties of the struct as its parameters. It then automatically treats these two pieces of code as being the same:
+        
+        ```swift
+        var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
+        var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
+        ```
+        
 
 ### Computed & Stored Properties
 
 - Structs have two type of properties:
-
-  1. a stored property, a variable / constant that holds a piece of data inside the struct so above a stored prop would be `name` or `vacationRemaining`
-  2. a computed property, calculates the value of a property each time it is accessed
-
-     ```swift
-     struct Employee {
-         let name: String
-         var vacationAllocated = 14
-         var vacationTaken = 0
-
-         var vacationRemaining: Int {
-             vacationAllocated - vacationTaken
-         }
-     }
-     ```
-
-     - The vacationRemaining is a computed property
-
+    1. a stored property, a variable / constant that holds a piece of data inside the struct so above a stored prop would be `name` or `vacationRemaining`
+    2. a computed property, calculates the value of a property each time it is accessed 
+        
+        ```swift
+        struct Employee {
+            let name: String
+            var vacationAllocated = 14
+            var vacationTaken = 0
+        
+            var vacationRemaining: Int {
+                vacationAllocated - vacationTaken
+            }
+        }
+        ```
+        
+        - The vacationRemaining is a computed property
 - With computed properties you can use getters and setters. Below would be an example:
-
-  ```swift
-  var vacationRemaining: Int {
-      get {
-          vacationAllocated - vacationTaken
-      }
-
-      set {
-          vacationAllocated = vacationTaken + newValue
-      }
-  }
-  ```
-
-  - by the looks you can use the `newValue` keyword to store the value the user was trying to assign to the property. So if you say `archer.vacationRemaining = 30`, then the newValue is `30`
-
+    
+    ```swift
+    var vacationRemaining: Int {
+        get {
+            vacationAllocated - vacationTaken
+        }
+    
+        set {
+            vacationAllocated = vacationTaken + newValue
+        }
+    }
+    ```
+    
+    - by the looks you can use the `newValue` keyword to store the value the user was trying to assign to the property. So if you say `archer.vacationRemaining = 30`, then the newValue is `30`
 - computed properties must also have a specific type and **can’t be constants**
 - computed properties must also return a value, they can’t just print a string for instance
 
@@ -841,8 +834,8 @@ struct Player {
 ```
 
 - Above we use the `init` keyword, and pass it the param name.
-  - we then initialize the name param with `self.name = name` and then set the number property to a random number btw 1 and 99
-  - this works because we have given all properties values by the time the initializer ends (properties being `name` and `number`) at the top of the struct.
+    - we then initialize the name param with `self.name = name` and then set the number property to a random number btw 1 and 99
+    - this works because we have given all properties values by the time the initializer ends (properties being `name` and `number`) at the top of the struct.
 
 ### Access Control
 
@@ -951,12 +944,12 @@ class Developer: Employee {
 ```
 
 - If you know for sure that your class should not support inheritance, you can mark it as **`final`**
-  . This means the class itself can inherit from other things, but can’t be used to inherit *from*
-   – no child class can use a final class as its parent.
+. This means the class itself can inherit from other things, but can’t be used to inherit *from*
+ – no child class can use a final class as its parent.
 
 ### Adding initializers for classes
 
-Say you have a class:
+Say you have a class: 
 
 ```swift
 class Vehicle {
@@ -968,7 +961,7 @@ class Vehicle {
 }
 ```
 
-Now if you have a `Car` class that inherits from `Vehicle`, swift will refuse to build that class unless you tell it what the values for `isElectric` are.
+Now if you have a `Car` class that inherits from `Vehicle`, swift will refuse to build that class unless you tell it what the values for `isElectric` are. 
 
 - To do that we use `super`, when we initialize any instances of the child class
 
@@ -986,3 +979,84 @@ let teslaX = Car(isElectric: true, isConvertible: false)
 ```
 
 ## Protocols and Extensions
+
+- Let us define a series of properties and methods that we want to use, they don’t actually implement them. They just say hey, these properties and method must exist, they are kind of like a blue print.
+
+```swift
+protocol Vehicle {
+    func estimateTime(for distance: Int) -> Int
+    func travel(distance: Int)
+}
+```
+
+- Above we have:
+    - created a protocol with the keyword, with a name (it’s a type so has to be in capitals)
+    - inside we list all the methods we require
+    - as you can see the methods don’t actually contain function bodies, we are just specifying the name, parameters and return types.
+- Now we can match a `Car` struct that conforms to the `Vehicle` protocol:
+    
+    ```swift
+    struct Car: Vehicle {
+        func estimateTime(for distance: Int) -> Int {
+            distance / 50
+        }
+    
+        func travel(distance: Int) {
+            print("I'm driving \(distance)km.")
+        }
+    
+        func openSunroof() {
+            print("It's a nice day!")
+        }
+    }
+    ```
+    
+    - All methods that exist in Vehicle must exist in Car otherwise car doesn’t conform to the vehicle protocol.
+    - These methods must exist exactly the same, by that I mean they must have the same name, params and return types.
+    - The difference is the methods in `Car` actually do something, they are the implementations.
+
+To understand why Protocols are useful you can look at the below example. But basically, they 
+
+If we create a function: 
+
+```swift
+func commute(distance: Int, using vehicle: Car) {
+    if vehicle.estimateTime(for: distance) > 100 {
+        print("That's too slow! I'll try a different vehicle.")
+    } else {
+        vehicle.travel(distance: distance)
+    }
+}
+
+let car = Car()
+commute(distance: 100, using: car)
+```
+
+- This works, but it doesn’t add value. The real value comes from changing the `vechical` param to the `Vehicle` protocol. Because swift knows that any type that conforms to the Vehicle type must have both the `estimateTime()` and `travel()` methods.
+    - Why that is valuable is because it now allows you to call the function with any type of data as long as that data conforms to the Vehicle protocol.
+    - So rewrite it like so:
+    
+    ```swift
+    func commute(distance: Int, using vehicle: Vehicle) {
+    ...
+    }
+    ```
+    
+- That is powerful because now you can create a new struct that conforms to the Vehicle type like Bicycle
+    
+    ```swift
+    struct Bicycle: Vehicle {
+        func estimateTime(for distance: Int) -> Int {
+            distance / 10
+        }
+    
+        func travel(distance: Int) {
+            print("I'm cycling \(distance)km.")
+        }
+    }
+    
+    let bike = Bicycle()
+    commute(distance: 50, using: bike)
+    ```
+    
+    - Once we have that we could pass either `car`
