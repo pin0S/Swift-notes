@@ -1059,4 +1059,4 @@ commute(distance: 100, using: car)
     commute(distance: 50, using: bike)
     ```
     
-    - Once we have that we could pass either `car`
+    - Once we have that we could pass either `car` ...
