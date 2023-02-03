@@ -1305,11 +1305,6 @@ struct ContentView: View {
 - Here, the **`TextField`** view takes a **`Binding`** to a **`String`** value, which is declared as a **`State`** property in the parent **`ContentView`**. **********The `$` creates the two way binding between the State property and the view.**
 - But notice how we use `name` and not `$name` in the Text view that is because we don’t want the two way binding here, we just want to ****read**** the value.
 
-## Project: WeSplit
+## Projects
+1. [WeSplit](./Projects/WeSplit)
 
-check-splitting app basic outline: 
-
-- enter the cost of your food,
-- select how much of a tip you want to leave,
-- and how many people you’re with,
-- and it will tell you how much each person needs to pay
