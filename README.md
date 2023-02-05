@@ -5,9 +5,7 @@
 **Up to: Day 17**
 
 *removed days, so I can better put data into categories.
-
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
-
 *added xCode tips at the top
 
 ## Fun facts
@@ -23,6 +21,11 @@ print(lyric)
 
 - SwiftUI has this weird rule, I call it weird because I don’t know the reason for it. But, you can only put 10 children inside a parent so a form could only have 10 children. that is unless you use the `Group`
 - There’s a saying among SwiftUI developers that our “views are a function of their state,” means that the way your user interface looks – the things people can see and what they can interact with – are determined by the state of your program
+    - Good example of this in the video here, when the tip % changes or the check amount (state) changes the view updates
+        
+        [Screen Recording 2023-02-04 at 1.07.03 pm.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/22baa392-b55c-4c0f-895b-bea1a9b04f9f/Screen_Recording_2023-02-04_at_1.07.03_pm.mov)
+        
+- A computed property is a property that is dynamically calculated based on other properties or values, while a stored property is a property that stores a value. The value of a stored property is set during initialization and can be changed throughout the lifetime of the object.
 
 ## Xcode tips
 
@@ -1199,6 +1202,12 @@ print(author)
     - The **`View`** protocol has only one requirement, which is that you have a computed property called **`body`** that returns **`some View`**
 - The **`body`** property has an interesting type: **`some View`**. This means it will return something that conforms to the **`View`** protocol, which is our layout. This means we expect some type to be returned, but we don't know what it will be, so we have you covered.
 - The **`ContentView_Previews`** struct conforms to the **`PreviewProvider`** protocol. This code is not part of the final app that goes to the App Store; it is only used by Xcode to display a preview of the UI design alongside the code.
+
+## Temp useful components section
+
+*NB put these into sections that make more sense once I get a better idea of where they are commonly used
+
+************`Picker`** - these are like a select input in html.  ************************
 
 ### View with loops
 
