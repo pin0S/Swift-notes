@@ -2,7 +2,7 @@
 
 ### Notes:
 
-**Up to: Day 17**
+**Up to: Day 24**
 
 *removed days, so I can better put data into categories.
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
@@ -1203,6 +1203,18 @@ print(author)
 - The **`body`** property has an interesting type: **`some View`**. This means it will return something that conforms to the **`View`** protocol, which is our layout. This means we expect some type to be returned, but we don't know what it will be, so we have you covered.
 - The **`ContentView_Previews`** struct conforms to the **`PreviewProvider`** protocol. This code is not part of the final app that goes to the App Store; it is only used by Xcode to display a preview of the UI design alongside the code.
 
+## Stacks
+
+A way for swiftui’s View to return multiple things, you have three options that I know about now:
+
+1. `**HStack**` - horizontal
+2. `**VStack**` - vertical 
+3. `**ZStack**` - zindex (depth)
+    1. **`ZStack`** draws its contents from top to bottom, back to front. This means if you have an image then some text **`ZStack`** will draw them in that order, placing the text on top of the image.
+
+- I think of these kind of like flex box, in that `HStack` sets it to `flex-direction: column` and `VStack` sets it to `flex-direction` row. While ZStack let’s you play with z-indexs
+- Vertical and horizontal stacks automatically fit their content, and prefer to align themselves to the center of the available space. If you want to change that you can use one or more **`Spacer`** views to push the contents of your stack to one side.
+
 ## Temp useful components section
 
 *NB put these into sections that make more sense once I get a better idea of where they are commonly used
@@ -1314,6 +1326,55 @@ struct ContentView: View {
 - Here, the **`TextField`** view takes a **`Binding`** to a **`String`** value, which is declared as a **`State`** property in the parent **`ContentView`**. **********The `$` creates the two way binding between the State property and the view.**
 - But notice how we use `name` and not `$name` in the Text view that is because we don’t want the two way binding here, we just want to ****read**** the value.
 
+## Colors and Frames
+
+- **`Color.primary`** - is the default color of text, will be either black or white depending on user’s device settings
+- **`Color.secondary`** - also either black or white depending one the device, but has slight transparency so that a little color behind shines through
+- You can create specific colors with rgb `Color(red: 1, green: 0.2, blue: 0)`
+    - they take values from 0 - 1
+- Frames are like `divs` - you can set width, height and other things and they cover that space.
+    
+    ```swift
+    VStack {
+    	Color.red
+        .frame(width: 200, height: 200)	
+    }
+    ```
+    
+- If you were to set the body to `Color.red`, you’d notice that there is a white bar at the top and the bottom of the screen, the space where it is red is called the *safe area.* Apple deliberately does this so you don’t put important UI elements of your app in the status bar etc.
+    - If you do want your content to go under the safe area. You can use the `.ignoreSafeArea()` modifier
+- the `background()` modifier also accepts `materials` which allows you to create some depth affects
+
+### Gradients
+
+There are three kind of gradients available in swiftUI:
+
+1. `LinearGradient`
+2. `RadialGradient`
+3. `AngularGradient`
+
+## Alerts
+
+A basic SwiftUI alert has a title and button that dismisses it.
+
+- You present an alert with `myAlert.show()`
+- Because our “views are a function of our state”, you need to setup some state that determines if the user should see the alert or not e.g. `@State **private** **var** showingAlert = false`
+    
+    ```swift
+    @State private var showingAlert = false
+    
+        var body: some View {
+            Button("Show Alert") {
+                showingAlert = true
+            }
+            .alert("Important message", isPresented: $showingAlert) {
+                Button("OK") { }
+            }
+        }
+    ```
+    
+    - I think swift automatically sets `showingAlert` to false if you press the “OK” button on the alert, because all actions in an alert dismiss the alert after the action runs.
+
 ## Projects
 1. [WeSplit](./Projects/WeSplit)
-
+2. [GuessTheFlag](./Projects//GuessTheFlag/)
