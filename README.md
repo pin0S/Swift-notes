@@ -1,8 +1,8 @@
 # 100 Days of SwiftUI
 
-### Notes:
+**Up to: Day 23**
 
-**Up to: Day 24**
+### Notes:
 
 *removed days, so I can better put data into categories.
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
@@ -1203,6 +1203,29 @@ print(author)
 - The **`body`** property has an interesting type: **`some View`**. This means it will return something that conforms to the **`View`** protocol, which is our layout. This means we expect some type to be returned, but we don't know what it will be, so we have you covered.
 - The **`ContentView_Previews`** struct conforms to the **`PreviewProvider`** protocol. This code is not part of the final app that goes to the App Store; it is only used by Xcode to display a preview of the UI design alongside the code.
 
+### Why structs and not classes
+
+Probably the most important reason for structs is that it forces us to think about isolating state in a clean way.
+
+## SwiftUI View
+
+- It is important to note that **for SwiftUI developers, there is nothing behind our view.** Meaning that when you try to make white space behind font turn `red` you shouldn’t do that with weird hacks or tricks.
+- Therefore it is important to try to think in the mindset of **what you see is what you have.**
+    - if you have this mindset then instead of thinking how to I make the color behind the text box a different color you think how do I make the text box bigger. Practically it would look like this:
+        
+        ```swift
+        Text("Hello, world!")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.red)
+        ```
+        
+
+### Some View
+
+What **`some View`** lets us do is say “this will be a view, such as **`Button`** or **`Text`**, but I don’t want to say what.” So, the hole that **`View`** has will be filled by a real view object, but we aren’t required to write out the exact long type.
+
+- Not sure how important this is going to be, basically `some View` is like an any type, saying put anything inside me and I’ll figure it out by creating a tuple and listing the types. If I struggle with stuff later on I can [revisit this lesson](https://www.hackingwithswift.com/books/ios-swiftui/why-does-swiftui-use-some-view-for-its-view-type)
+
 ## Stacks
 
 A way for swiftui’s View to return multiple things, you have three options that I know about now:
@@ -1374,6 +1397,37 @@ A basic SwiftUI alert has a title and button that dismisses it.
     ```
     
     - I think swift automatically sets `showingAlert` to false if you press the “OK” button on the alert, because all actions in an alert dismiss the alert after the action runs.
+
+## Modifiers
+
+- When we add a modifier to a view, we are creating a new view with that change applied
+- So order matters with modifiers, take the below example
+    
+    ```swift
+    Button("Hello, world!") {
+        // do nothing
+    }    
+    .background(.red)
+    .frame(width: 200, height: 200)
+    //.border(Color.black, width: 1)
+    ```
+    
+- The above produces a small red box and then a white 200x200 frame, if you add `.border(Color.black, width: 1)` you’ll see the frame.
+- To crystalize this, have a look at what happens when you use swifts `type(:of)` method
+    
+    ```swift
+    Button("Hello, world!") {
+        print(type(of: self.body))
+    }    
+    .background(.red)
+    .frame(width: 200, height: 200)
+    ```
+    
+- The above outputs **`ModifiedContent<ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>>, _FrameLayout>`**
+    - Things to notice here are:
+        - every time you use a modifier swift applies that modifier using generics `ModifiedContent<OurThing, OurModifier>`
+        - What is happening above is they are getting stacked, **`<ModifiedContent<ModifiedContent`**
+    - To read it you need to work from the inner most type, out. So the inner most is **`ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>`**: our button has some text with a background color applied. Then around that we have **`ModifiedContent<…, _FrameLayout>`**, which takes our first view (button + background color) and gives it a larger frame.
 
 ## Projects
 1. [WeSplit](./Projects/WeSplit)
