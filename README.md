@@ -1,11 +1,15 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 23**
+# 100 Days of SwiftUI
+
+**Up to: Day 26**
 
 ### Notes:
 
 *removed days, so I can better put data into categories.
+
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
+
 *added xCode tips at the top
 
 ## Fun facts
@@ -160,7 +164,6 @@ let firstMember = originalCrew[0]
 - `contains()` - check if value is in an array
 - `sorted()` sorted in ascending order
 - `reversed()` reverses order
-
 - You can create arrays like so `var someArray = [String]()` or `var someOtherArray = Array<String>()`
 - With swift you need to tell it what type of data it is storing, however it is smart enough to know what type it is if you just pass it some initial values
 
@@ -1219,12 +1222,67 @@ Probably the most important reason for structs is that it forces us to think abo
             .background(.red)
         ```
         
+- all something needs to do in order to conform to the **`View`** protocol is to have a single computed property called **`body`** that returns **`some View`**
 
 ### Some View
 
 What **`some View`** lets us do is say “this will be a view, such as **`Button`** or **`Text`**, but I don’t want to say what.” So, the hole that **`View`** has will be filled by a real view object, but we aren’t required to write out the exact long type.
 
 - Not sure how important this is going to be, basically `some View` is like an any type, saying put anything inside me and I’ll figure it out by creating a tuple and listing the types. If I struggle with stuff later on I can [revisit this lesson](https://www.hackingwithswift.com/books/ios-swiftui/why-does-swiftui-use-some-view-for-its-view-type)
+
+### View composition (components??)
+
+Swift lets you break up views into multiple smaller views. Below is an example:
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            Text("First")
+                .font(.largeTitle)
+                .padding()
+                .foregroundColor(.white)
+                .background(.blue)
+                .clipShape(Capsule())
+
+            Text("Second")
+                .font(.largeTitle)
+                .padding()
+                .foregroundColor(.white)
+                .background(.blue)
+                .clipShape(Capsule())
+        }
+    }
+}
+```
+
+- This can be made DRY
+
+```swift
+struct CapsuleText: View {
+    var text: String
+
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .foregroundColor(.white)
+            .background(.blue)
+            .clipShape(Capsule())
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+            CapsuleText(text: "Second")
+        }
+    }
+}
+```
+
+- What I’m not sure on yet is if, you put these in another file or if the convention is for these to live inside the parent.
 
 ## Stacks
 
@@ -1428,6 +1486,28 @@ A basic SwiftUI alert has a title and button that dismisses it.
         - every time you use a modifier swift applies that modifier using generics `ModifiedContent<OurThing, OurModifier>`
         - What is happening above is they are getting stacked, **`<ModifiedContent<ModifiedContent`**
     - To read it you need to work from the inner most type, out. So the inner most is **`ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>`**: our button has some text with a background color applied. Then around that we have **`ModifiedContent<…, _FrameLayout>`**, which takes our first view (button + background color) and gives it a larger frame.
+
+### custom modifiers
+
+Using the `VIewModifier` protocol, you can create your own custom modifiers. 
+
+```swift
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+}
+
+Text("Hello World")
+    .modifier(Title())
+```
+
+- You can use `extension`'s to make the easier to use:
 
 ## Projects
 1. [WeSplit](./Projects/WeSplit)
