@@ -1,15 +1,11 @@
 # 100 Days of SwiftUI
 
-# 100 Days of SwiftUI
-
-**Up to: Day 26**
+**Up to: Day 28**
 
 ### Notes:
 
 *removed days, so I can better put data into categories.
-
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
-
 *added xCode tips at the top
 
 ## Fun facts
@@ -30,6 +26,12 @@ print(lyric)
         [Screen Recording 2023-02-04 at 1.07.03 pm.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/22baa392-b55c-4c0f-895b-bea1a9b04f9f/Screen_Recording_2023-02-04_at_1.07.03_pm.mov)
         
 - A computed property is a property that is dynamically calculated based on other properties or values, while a stored property is a property that stores a value. The value of a stored property is set during initialization and can be changed throughout the lifetime of the object.
+- **On day 26, I learned that xCode has a documents function where you can read the docs for anything. Yep on day 26 :| . You just need to click on the object in the ide and it shows up on the inspectors tab**
+    
+    ![Screenshot 2023-02-08 at 19.15.35.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c2bcf8e7-4c68-45ce-b2b4-e5ce15c57237/Screenshot_2023-02-08_at_19.15.35.png)
+    
+
+ ****
 
 ## Xcode tips
 
@@ -1302,6 +1304,22 @@ A way for swiftui’s View to return multiple things, you have three options tha
 
 ************`Picker`** - these are like a select input in html.  ************************
 
+`**Stepper`** - simple - | + button takes text, value, range and steps
+
+```swift
+@State private var sleepAmount = 8.0
+
+Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25) ****
+```
+
+****`DatePicker`** - way for users to set a date (docs are good for these)
+
+```swift
+@State private var wakeUp = Date.now
+
+DatePicker("Please enter a date", selection: $wakeUp) ********
+```
+
 ### View with loops
 
 `**ForEach`** - lets you loop over values and create views, basic example: 
@@ -1508,6 +1526,33 @@ Text("Hello World")
 ```
 
 - You can use `extension`'s to make the easier to use:
+
+```swift
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
+    }
+}
+
+Text("Hello World")
+    .titleStyle()
+```
+
+## Working with Dates
+
+- You can create a basic `Date` type with `Date.now` , which gives you the date and time for that exact moment
+- Swift lets you get more general by using the `DateComponents`
+    - This lets you read or write specific parts of a date rather than the whole thing
+    
+    ```swift
+    var components = DateComponents()
+    components.hour = 8
+    components.minute = 0
+    let date = Calendar.current.date(from: components) ?? Date.now // use nil coalescing 
+    // because date(from:) returns an optional date
+    ```
+    
+    - Above we representing 8am today
 
 ## Projects
 1. [WeSplit](./Projects/WeSplit)
