@@ -1,11 +1,12 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 28**
-
+**Up to: Day 29**
 ### Notes:
 
 *removed days, so I can better put data into categories.
+
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
+
 *added xCode tips at the top
 
 ## Fun facts
@@ -1320,6 +1321,30 @@ Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, ste
 DatePicker("Please enter a date", selection: $wakeUp) ********
 ```
 
+**`List`** - a scrolling table of data.
+
+- One cool thing about lists is you can mix in static and dynamic data
+
+```swift
+List {
+    Section("Section 1") {
+        Text("Static row 1")
+        Text("Static row 2")
+    }
+
+    Section("Section 2") {
+        ForEach(0..<5) {
+            Text("Dynamic row \($0)")
+        }
+    }
+
+    Section("Section 3") {
+        Text("Static row 3")
+        Text("Static row 4")
+    }
+}
+```
+
 ### View with loops
 
 `**ForEach`** - lets you loop over values and create views, basic example: 
@@ -1553,6 +1578,28 @@ Text("Hello World")
     ```
     
     - Above we representing 8am today
+
+## URLs
+
+You can access files in your bundle using the `Bundle.main.url()` method. 
+
+- If the file exists it is sent back to us otherwise it will return `nil`
+
+```swift
+if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt") {
+    // we found the file in our bundle!
+}
+```
+
+- Once you have the file you can load it into a a string with `String(contentsOf: )`
+
+```swift
+if let fileContents = try? String(contentsOf: fileURL) {
+    // we loaded the file into a string!
+}
+```
+
+- You need the `try?` because if the file can’t be loaded it throws an error
 
 ## Projects
 1. [WeSplit](./Projects/WeSplit)
