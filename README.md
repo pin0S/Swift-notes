@@ -1,13 +1,14 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 29**
+**Up to: Day 32**
+
 ### Notes:
 
 *removed days, so I can better put data into categories.
-
 *Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
-
 *added xCode tips at the top
+
+[] Need to review extensions and protocols, don't know what is happening
 
 ## Fun facts
 
@@ -1601,6 +1602,170 @@ if let fileContents = try? String(contentsOf: fileURL) {
 
 - You need the `try?` because if the file can’t be loaded it throws an error
 
-## Projects
-1. [WeSplit](./Projects/WeSplit)
-2. [GuessTheFlag](./Projects//GuessTheFlag/)
+## Animations
+
+You can use the `animation` modifier to smoothly transition changes.
+
+- It takes a animation type like “*ease-in ease-out”* (default)
+- It also has a value that it listens for, so it knows when to animate so in the example below it listens for when the `animationAmount` property changes
+
+```swift
+struct ContentView: View {
+    @State private var animationAmount = 1.0
+
+    var body: some View {
+        Button("Tap Me") {
+            animationAmount += 1
+        }
+        .padding(50)
+        .background(.red)
+        .foregroundColor(.white)
+        .clipShape(Circle())
+        .scaleEffect(animationAmount)
+        .blur(radius: (animationAmount - 1) * 3)
+        .animation(.default, value: animationAmount)
+    }
+}
+```
+
+- When the button gets tapped its action is to add on to `animationAmount` which updates the property, the animation modifier is listening for that and thus it smoothly scales it up and applies blur.
+    - without the `animationModifier` the `blur` and `scaleEffect` would appear more stuttered
+- You would call these implicit animations because they always need to listen for a value to change
+
+A really cool feature is that swiftUI has spring animations built in
+
+- you can use the `interpolatingSpring` modifier inside of the `animation` modifier
+    
+    ```swift
+    .animation(.interpolatingSpring(stiffness: 50, damping: 1), value: animationAmount)
+    ```
+    
+    - `stiffness` of the spring which sets its initial velocity when the animation starts
+    - `damping` how fast the animation should be “`damped`” lower values cause the spring to bounce back and forth for longer.
+
+You can also set `duration` on the animation
+
+```swift
+.animation(.easeInOut(duration: 2), value: animationAmount)
+```
+
+- When you pass the duration argument you are actually creating a new instance of a `Animation` struct that has it’s own modifiers
+    - so you can attach modifiers like `delay` or `repeatCount` directly to animation
+
+```swift
+.animation(
+    .easeInOut(duration: 2)
+        .delay(1),
+    value: animationAmount
+)
+
+// or 
+
+.animation(
+    .easeInOut(duration: 1)
+        .repeatCount(3, autoreverses: true),
+    value: animationAmount
+)
+```
+
+The **`animation()`** modifier can be applied to any SwiftUI binding, which causes the value to animate between its current and new value, in the below example animationAmount is passed to the `scaleEffect` modifier but it only animates when we use the stepper not on the button press.
+
+```swift
+struct ContentView: View {
+    @State private var animationAmount = 1.0
+
+    var body: some View {
+        VStack {
+            Stepper("Scale amount", value: $animationAmount.animation(), in: 1...10)
+
+            Spacer()
+
+            Button("Tap Me") {
+                animationAmount += 1
+            }
+            .padding(40)
+            .background(.red)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .scaleEffect(animationAmount)
+        }
+    }
+}
+```
+
+- So animation amount is tied to the button press and the stepper press but only one makes them animate.
+
+### Explicit animations
+
+**Above was all implicit animations*
+
+You can explicitly tell swiftui to animate changes occurring as the result of a state change
+
+- Using the `withAnimation` closure, swiftUI ensures any changes resulting from the new state will automatically be animated
+    
+    ```swift
+    struct ContentView: View {
+        @State private var animationAmount = 0.0
+    
+        var body: some View {
+            Button("Tap Me") {
+                withAnimation {
+                    animationAmount += 360
+                }
+            }
+            .padding(50)
+            .background(.red)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
+        }
+    }
+    ```
+    
+    - so above you’ll notice there is no `.animation` modifier, rather explicitly saying when the button is tapped add 360 to the animationAmount with an animation. And because animation amount is bound to the `rotation3DEffect` it is animated.
+    - You could swap `rotation3DEffect` with the `scaleEffect` we’ve been using and it would still work
+        
+        ```swift
+        Button("Tap Me") {
+            withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+                animationAmount += 1
+        	  }
+          }
+          .padding(50)
+          .background(.red)
+          .foregroundColor(.white)
+          .clipShape(Circle())
+          .scaleEffect(animationAmount)
+        }
+        ```
+        
+
+## Showing / hiding views with transitions
+
+You can use the `transition` modifier to animate how a view is show and hidden
+
+- You need some state the toggles the change between whether the view is shown or hidden
+- You then wrap that view in the condition
+- when the condition changes the transition modifier will handle the change smoothly
+- You can also make the transition asymmetric meaning the transition effect will be different on show and hide
+
+```swift
+struct ContentView: View {
+	@State private var isShowingRed = false
+
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                isShowingRed.toggle()
+            }
+					
+					// wrap the view in a condition
+          if isShowingRed {
+				    Rectangle()
+				        .fill(.red)
+				        .frame(width: 200, height: 200)
+								.transition(.asymmetric(insertion: .scale, removal: .opacity))
+					}
+    }
+}
+```
