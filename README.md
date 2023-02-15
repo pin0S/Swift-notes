@@ -1,14 +1,14 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 32**
+**Up to: Day 37**
 
 ### Notes:
 
-*removed days, so I can better put data into categories.
-*Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
-*added xCode tips at the top
+\*removed days, so I can better put data into categories.
 
-[] Need to review extensions and protocols, don't know what is happening
+\*Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
+
+\*added xCode tips at the top
 
 ## Fun facts
 
@@ -23,22 +23,23 @@ print(lyric)
 
 - SwiftUI has this weird rule, I call it weird because I don’t know the reason for it. But, you can only put 10 children inside a parent so a form could only have 10 children. that is unless you use the `Group`
 - There’s a saying among SwiftUI developers that our “views are a function of their state,” means that the way your user interface looks – the things people can see and what they can interact with – are determined by the state of your program
-    - Good example of this in the video here, when the tip % changes or the check amount (state) changes the view updates
-        
-        [Screen Recording 2023-02-04 at 1.07.03 pm.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/22baa392-b55c-4c0f-895b-bea1a9b04f9f/Screen_Recording_2023-02-04_at_1.07.03_pm.mov)
-        
+  - Good example of this in the video here, when the tip % changes or the check amount (state) changes the view updates
+    [Screen Recording 2023-02-04 at 1.07.03 pm.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/22baa392-b55c-4c0f-895b-bea1a9b04f9f/Screen_Recording_2023-02-04_at_1.07.03_pm.mov)
 - A computed property is a property that is dynamically calculated based on other properties or values, while a stored property is a property that stores a value. The value of a stored property is set during initialization and can be changed throughout the lifetime of the object.
 - **On day 26, I learned that xCode has a documents function where you can read the docs for anything. Yep on day 26 :| . You just need to click on the object in the ide and it shows up on the inspectors tab**
-    
-    ![Screenshot 2023-02-08 at 19.15.35.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c2bcf8e7-4c68-45ce-b2b4-e5ce15c57237/Screenshot_2023-02-08_at_19.15.35.png)
-    
 
- ****
+  ![Screenshot 2023-02-08 at 19.15.35.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c2bcf8e7-4c68-45ce-b2b4-e5ce15c57237/Screenshot_2023-02-08_at_19.15.35.png)
+
+  ***
 
 ## Xcode tips
 
 - Depending on Xcode’s configuration, you may or may not see file extensions in your project navigator. You can control this by going to Xcode’s preferences, choosing the General tab, then adjusting the File Extensions option.
 - `Option+Cmd+P` will resume canvas preview
+
+## Definitions of swift terminology
+
+- **Property wrappers**: used to define the behavior of views and their properties. SwiftUI provides several built-in property wrappers, such as `**`@State`**, **`@Binding`**, and **`@EnvironmentObject`\*\*, which enable reactive programming and easy sharing of data across views.
 
 ## Simple Datatypes
 
@@ -48,7 +49,7 @@ print(lyric)
 - `let` is a constant - meaning this is a value can’t change
 
 ```swift
-let manger = "Michael Scott" 
+let manger = "Michael Scott"
 var assistantManger = "Dwight Schrute"
 ```
 
@@ -59,17 +60,17 @@ var assistantManger = "Dwight Schrute"
 
 ```swift
 """
-This is a 
+This is a
 multi-line
 string
 """
 ```
 
-Some useful methods: 
+Some useful methods:
 
 ```swift
-someString.uppercased() 
-someString.count 
+someString.uppercased()
+someString.count
 someString.hasPrefix("Mr")
 someString.hasSuffix(".png")
 
@@ -84,7 +85,7 @@ let first = "Luffy"
 let middle = "D"
 let last = "Monkey"
 
-let full = first + " " + middle + ". " + last 
+let full = first + " " + middle + ". " + last
 ```
 
 **Interpolation**
@@ -178,7 +179,7 @@ var albums = ["stringArray"]
 ### Dictionaries
 
 - I think these are like Objects in JS, except they confusingly use the same syntax as an array `[]`
-    - same key, value pair setup (key on left, value on right)
+  - same key, value pair setup (key on left, value on right)
 
 ```swift
 let olympics = [
@@ -198,14 +199,12 @@ heights["LeBron James"] = 206
 ```
 
 - Swift wants you to give default values in case there is nothing there, otherwise it complains `Expression implicitly coerced from 'String?' to 'Any'`
-    - to fix we give it what it wants, a default value:
-    
-    ```swift
-    print(heights["Yao Ming", default: 0])
-    print(heights["Shaquille O'Neal", default: 0])
-    print(heights["LeBron James", default: 0])
-    ```
-    
+  - to fix we give it what it wants, a default value:
+  ```swift
+  print(heights["Yao Ming", default: 0])
+  print(heights["Shaquille O'Neal", default: 0])
+  print(heights["LeBron James", default: 0])
+  ```
 - You can reassign values in a dictionary like so:
 
 ```swift
@@ -225,7 +224,7 @@ let people = Set(["Denzel Washington", "Tom Cruise", "Nicolas Cage", "Samuel L J
 - These don’t care about order
 - Sets are way faster than arrays for lookups so they can be really useful for that
 
-**Note: added concatenation & interpolation to strings section*
+\*_Note: added concatenation & interpolation to strings section_
 
 ### Enums
 
@@ -269,7 +268,7 @@ var futureCrew: [String] = [String]()
 ```
 
 - If you don’t provide initial data for swift to infer the type then you need to let it know the type e.g. `var teams: [String] = [String]()`
-    - You need to provide the parentheses `()` when making empty arrays, dicts and sets
+  - You need to provide the parentheses `()` when making empty arrays, dicts and sets
 - Better way to explicitly tell swift type
 
 ```swift
@@ -279,20 +278,18 @@ var clues = [String]()
 ## Conditions
 
 - if
-    
-    ```swift
-    if score > 80 {
-    	print("Condition Met")
-    }
-    ```
-    
+  ```swift
+  if score > 80 {
+  	print("Condition Met")
+  }
+  ```
 - comparison operators:
-    - `==` is equal to
-    - `!=` not equal to
-    - `>=`
-    - `<=`
-    - `<`
-    - `>`
+  - `==` is equal to
+  - `!=` not equal to
+  - `>=`
+  - `<=`
+  - `<`
+  - `>`
 - **if else**
 
 ```swift
@@ -315,11 +312,11 @@ if a {
 }
 ```
 
-- **********************************logical operators**********************************
-    - `&&` and
-    - `||` or
+- ****************\*\*****************logical operators****************\*\*****************
+  - `&&` and
+  - `||` or
 - Using enums as conditionals
-    - interesting how you only need to use the `.value` syntax rather than `enumName.value`
+  - interesting how you only need to use the `.value` syntax rather than `enumName.value`
 
 ```swift
 enum TransportOption {
@@ -353,15 +350,15 @@ case .snow:
     print("School is cancelled.")
 case .unknown:
     print("Our forecast generator is broken!")
-default: 
+default:
 	print("It's Melbourne you stuffed")
 }
 ```
 
 - All **`switch`** statements *must* be exhaustive, meaning that all possible values must be handled in there so you can’t leave one off by accident. Hence why we have a `default`.
-    - Order matters, because it goes through from top to bottom so you want `default` at the end
+  - Order matters, because it goes through from top to bottom so you want `default` at the end
 - Swift will execute the first case that matches the condition you’re checking, but no more. Unlike JS where you need to have a break otherwise it will carry on executing other code from all subsequent cases.
-    - If you want it to keep going you can use `fallthrough` keyword, you just put it at the end of the case (above the would mean below the print statement).
+  - If you want it to keep going you can use `fallthrough` keyword, you just put it at the end of the case (above the would mean below the print statement).
 
 ### Ternary
 
@@ -371,7 +368,7 @@ default:
 let canVote = age >= 18 ? "Yes" : "No"
 ```
 
-*Cool little way to remember how ternaries work from the course ******WTF = what, true, false******
+\*Cool little way to remember how ternaries work from the course **\*\***WTF = what, true, false**\*\***
 
 ## Loops
 
@@ -438,16 +435,16 @@ func nameOfFunction {
 }
 ```
 
-Three things to basic functions: 
+Three things to basic functions:
 
 1. The `func` keyword
 2. the name of the function followed by `()`
 3. the body of the function
 
 - To call a function you do `nameOfFunction()`
-    - swift call this the functions *********call site,********* in laymans it means a place where the function is called
+  - swift call this the functions ****\*****call site,****\***** in laymans it means a place where the function is called
 
-Writing parameters & arguments 
+Writing parameters & arguments
 
 ```swift
 func printTimesTables(number: Int) {
@@ -490,7 +487,7 @@ func areLettersIdentical(string1: String, string2: String) -> Bool {
 
 - In the above example we don’t even need the `return` keyword because swift is smart enough to know since there is only one line it must return that data **(but only works when single line in func)**
 
-You can use **************`return` to force a function to exit early**
+You can use ******\*\*******`return` to force a function to exit early\*\*
 
 ### Returning multiple values with tuples
 
@@ -505,78 +502,78 @@ print("Name: \(user.firstName) \(user.lastName)")
 
 - the return type is a tuple that contains 2 strings
 - The diff between dictionaries and tuples is that tuples don’t need to know whether the data is present ahead of time or not, so you don’t need to return a default value like you would with a dict.
-    - This is because swift knows ahead of time what is available in a tuple. For instance if you tried to print `user.job` it would tell you the `Value of tuple type '(firstName: String, lastName: String)' has no member 'job'`
+  - This is because swift knows ahead of time what is available in a tuple. For instance if you tried to print `user.job` it would tell you the `Value of tuple type '(firstName: String, lastName: String)' has no member 'job'`
 
 Three things worth knowing about tuples that you might see in the wild
 
 1. You might see a the tuple without the names / parameters because swift already knows the name of the parameters and I’m guessing the only thing that matters is order
-    
-    ```swift
-    func getUser() -> (firstName: String, lastName: String) {
-        ("Taylor", "Swift")
-    }
-    ```
-    
+
+   ```swift
+   func getUser() -> (firstName: String, lastName: String) {
+       ("Taylor", "Swift")
+   }
+   ```
+
 2. You can also access tuples with indices when they aren’t given names
-    
-    ```swift
-    func getUser() -> (String, String) {
-        ("Taylor", "Swift")
-    }
-    
-    let user = getUser()
-    print("Name: \(user.0) \(user.1)")
-    ```
-    
-3. Tuples have a similar thing to destructuring in javascript, you just pass the  names inside of parentheses and they you can call those variables. 
-    
-    ```swift
-    let (firstName, lastName) = getUser()
-    print("Name: \(firstName) \(lastName)")
-    ```
-    
+
+   ```swift
+   func getUser() -> (String, String) {
+       ("Taylor", "Swift")
+   }
+
+   let user = getUser()
+   print("Name: \(user.0) \(user.1)")
+   ```
+
+3. Tuples have a similar thing to destructuring in javascript, you just pass the names inside of parentheses and they you can call those variables.
+
+   ```swift
+   let (firstName, lastName) = getUser()
+   print("Name: \(firstName) \(lastName)")
+   ```
 
 ### Customizing parameter labels
 
-**this is semi important I see this syntax all over the place and didn’t understand it until now*
+\*_this is semi important I see this syntax all over the place and didn’t understand it until now_
 
 - Swift gives us two ways we can customize parameter labels:
-    1. we can use the `_` for the external name, meaning it doesn’t get used
-        
-        ```swift
-        func isUppercase(string: String) -> Bool {
-            string == string.uppercased()
-        }
-        
-        let string = "HELLO, WORLD"
-        let result = isUppercase(string: string)
-        
-        // vs 
-        
-        func isUppercase(_ string: String) -> Bool {
-            string == string.uppercased()
-        }
-        
-        let string = "HELLO, WORLD"
-        let result = isUppercase(string)
-        ```
-        
-        - Notice in the second example, we don’t need to use the external parameter label. **It is optional.**
-        - *NB: External parameter is the parameter that is used when calling the function, so above the external parameter name is `_` and below it is `for`
-    2. we can add a second parameter name so that we have both internal and external names
-        
-        ```swift
-        func printTimesTables(for number: Int) {
-            for i in 1...12 {
-                print("\(i) x \(number) is \(i * number)")
-            }
-        }
-        
-        printTimesTables(for: 5)
-        ```
-        
-        - here the external name is `for` and the internal name is `number` that is type int
-        - when we call the function we use the external name parameter because it reads more human “print times tables for 5” vas. “print times table for number 5”. Five is already a number dummy.
+  1. we can use the `_` for the external name, meaning it doesn’t get used
+
+     ```swift
+     func isUppercase(string: String) -> Bool {
+         string == string.uppercased()
+     }
+
+     let string = "HELLO, WORLD"
+     let result = isUppercase(string: string)
+
+     // vs
+
+     func isUppercase(_ string: String) -> Bool {
+         string == string.uppercased()
+     }
+
+     let string = "HELLO, WORLD"
+     let result = isUppercase(string)
+     ```
+
+     - Notice in the second example, we don’t need to use the external parameter label. **It is optional.**
+     - \*NB: External parameter is the parameter that is used when calling the function, so above the external parameter name is `_` and below it is `for`
+
+  2. we can add a second parameter name so that we have both internal and external names
+
+     ```swift
+     func printTimesTables(for number: Int) {
+         for i in 1...12 {
+             print("\(i) x \(number) is \(i * number)")
+         }
+     }
+
+     printTimesTables(for: 5)
+     ```
+
+     - here the external name is `for` and the internal name is `number` that is type int
+     - when we call the function we use the external name parameter because it reads more human “print times tables for 5” vas. “print times table for number 5”. Five is already a number dummy.
 
 ### Default parameter values
 
@@ -620,20 +617,18 @@ func checkPassword(_ password: String) throws -> String {
 ```
 
 - Another way to handle errors in functions is with a essentially a try catch block you’d use in JS. Except it is a `do`, `try`, `catch` block I think.
-    
-    ```swift
-    let string = "12345"
-    
-    do {
-        let result = try checkPassword(string)
-        print("Password rating: \(result)")
-    } catch {
-        print("There was an error.")
-    }
-    ```
-    
-    - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
-    - `try` has to be inside a `do` block.
+  ```swift
+  let string = "12345"
+
+  do {
+      let result = try checkPassword(string)
+      print("Password rating: \(result)")
+  } catch {
+      print("There was an error.")
+  }
+  ```
+  - `try` has to be written before calling any functions that might through errors, so about the `checkPassword` might through an error.
+  - `try` has to be inside a `do` block.
 
 ## Closures
 
@@ -648,16 +643,14 @@ sayHello()
 ```
 
 - If you want a closure to except parameters you need to declare them inside the `{}` curly braces.
-    
-    ```swift
-    let sayHello = { (name: String) -> String in
-        "Hi \(name)!"
-    }
-    ```
-    
-    - here you have declared the parameter `name` with the type `String`
-    - told swift the return value is a `String`
-    - Then used the keyword `in`
+  ```swift
+  let sayHello = { (name: String) -> String in
+      "Hi \(name)!"
+  }
+  ```
+  - here you have declared the parameter `name` with the type `String`
+  - told swift the return value is a `String`
+  - Then used the keyword `in`
 - `in` is used to mark the end of the parameters and return type in a closure
 
 You don’t need to to give a closure a return type, the below is valid because it is a `Void` type, that is it returns nothing
@@ -672,39 +665,33 @@ cleanRoom("kitchen")
 The thing to recognize with closures it that they start by assigning a variable and use the **`{}`.**
 
 - You’ll see ones that don’t pass the parameter types or a return value:
-    
-    ```swift
-    let captainFirstTeam = team.sorted { name1, name2 in
-        if name1 == "Suzanne" {
-            return true
-        } else if name2 == "Suzanne" {
-            return false
-        }
-    
-        return name1 < name2
-    } ****
-    ```
-    
+  ```swift
+  let captainFirstTeam = team.sorted { name1, name2 in
+      if name1 == "Suzanne" {
+          return true
+      } else if name2 == "Suzanne" {
+          return false
+      }
+
+      return name1 < name2
+  } ****
+  ```
 - Ones that you don’t even need to even pass a parameter:
-    
-    ```swift
-    let captainFirstTeam = team.sorted {
-        if $0 == "Suzanne" {
-            return true
-        } else if $1 == "Suzanne" {
-            return false
-        }
-    
-        return $0 < $1
-    }
-    ```
-    
+  ```swift
+  let captainFirstTeam = team.sorted {
+      if $0 == "Suzanne" {
+          return true
+      } else if $1 == "Suzanne" {
+          return false
+      }
+
+      return $0 < $1
+  }
+  ```
 - Ones where you don’t use a return
-    
-    ```swift
-    let reverseTeam = team.sorted { $0 > $1 }
-    ```
-    
+  ```swift
+  let reverseTeam = team.sorted { $0 > $1 }
+  ```
 
 ## Structs
 
@@ -732,14 +719,14 @@ wings.printSummary()
 ```
 
 - This creates a new type called Album
-    - It has three constants - `title`, `artist`, `year`
-        - A simple function `printSummary`
+  - It has three constants - `title`, `artist`, `year`
+    - A simple function `printSummary`
 
 Structs have to use CamalCase, but inside we use camalCase (is that right? surely these have individual names, someone please leave a comment)
 
 - When you create a new instance of a struct you need to **provide values for each of the constants in the order they were defined.** So above I couldn’t go `let red = Album(year: 2012, title: "Red", artist: "Taylor Swift"`)
 
-If you create a struct using a constant like above, swift makes the struct and all of its data constant meaning we can’t reassign it. The below is an example of where this would be a problem: 
+If you create a struct using a constant like above, swift makes the struct and all of its data constant meaning we can’t reassign it. The below is an example of where this would be a problem:
 
 ```swift
 struct Employee {
@@ -759,7 +746,7 @@ struct Employee {
 
 let archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
 archer.takeVacation(days: 5)
-print(archer.vacationRemaining) 
+print(archer.vacationRemaining)
 ```
 
 - This doesn’t work because the function isn’t allowed to change the struct’s data because we made it constant.
@@ -783,7 +770,7 @@ struct Employee {
 
 var archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
 archer.takeVacation(days: 5)
-print(archer.vacationRemaining) 
+print(archer.vacationRemaining)
 ```
 
 - But if we change archer to a constant it won’t work again because we’re trying to call a `mutating` function on a constant struct, which isn’t allowed.
@@ -794,48 +781,44 @@ print(archer.vacationRemaining)
 - Functions that belong to structs are called *methods*.
 - When we create a constant or variable out of a struct, we call that an *instance* – you might create a dozen unique instances of the **`Album`** struct, for example.
 - When we create instances of structs we do so using an *initializer* like this: **`Album(title: "Wings", artist: "BTS", year: 2016)`**.
-    - Swift silently creates a special function inside the struct called **`init()`**, using all the properties of the struct as its parameters. It then automatically treats these two pieces of code as being the same:
-        
-        ```swift
-        var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
-        var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
-        ```
-        
+  - Swift silently creates a special function inside the struct called **`init()`**, using all the properties of the struct as its parameters. It then automatically treats these two pieces of code as being the same:
+    ```swift
+    var archer1 = Employee(name: "Sterling Archer", vacationRemaining: 14)
+    var archer2 = Employee.init(name: "Sterling Archer", vacationRemaining: 14)
+    ```
 
 ### Computed & Stored Properties
 
 - Structs have two type of properties:
-    1. a stored property, a variable / constant that holds a piece of data inside the struct so above a stored prop would be `name` or `vacationRemaining`
-    2. a computed property, calculates the value of a property each time it is accessed 
-        
-        ```swift
-        struct Employee {
-            let name: String
-            var vacationAllocated = 14
-            var vacationTaken = 0
-        
-            var vacationRemaining: Int {
-                vacationAllocated - vacationTaken
-            }
-        }
-        ```
-        
-        - The vacationRemaining is a computed property
+  1. a stored property, a variable / constant that holds a piece of data inside the struct so above a stored prop would be `name` or `vacationRemaining`
+  2. a computed property, calculates the value of a property each time it is accessed
+
+     ```swift
+     struct Employee {
+         let name: String
+         var vacationAllocated = 14
+         var vacationTaken = 0
+
+         var vacationRemaining: Int {
+             vacationAllocated - vacationTaken
+         }
+     }
+     ```
+
+     - The vacationRemaining is a computed property
 - With computed properties you can use getters and setters. Below would be an example:
-    
-    ```swift
-    var vacationRemaining: Int {
-        get {
-            vacationAllocated - vacationTaken
-        }
-    
-        set {
-            vacationAllocated = vacationTaken + newValue
-        }
-    }
-    ```
-    
-    - by the looks you can use the `newValue` keyword to store the value the user was trying to assign to the property. So if you say `archer.vacationRemaining = 30`, then the newValue is `30`
+  ```swift
+  var vacationRemaining: Int {
+      get {
+          vacationAllocated - vacationTaken
+      }
+
+      set {
+          vacationAllocated = vacationTaken + newValue
+      }
+  }
+  ```
+  - by the looks you can use the `newValue` keyword to store the value the user was trying to assign to the property. So if you say `archer.vacationRemaining = 30`, then the newValue is `30`
 - computed properties must also have a specific type and **can’t be constants**
 - computed properties must also return a value, they can’t just print a string for instance
 
@@ -856,8 +839,8 @@ struct Player {
 ```
 
 - Above we use the `init` keyword, and pass it the param name.
-    - we then initialize the name param with `self.name = name` and then set the number property to a random number btw 1 and 99
-    - this works because we have given all properties values by the time the initializer ends (properties being `name` and `number`) at the top of the struct.
+  - we then initialize the name param with `self.name = name` and then set the number property to a random number btw 1 and 99
+  - this works because we have given all properties values by the time the initializer ends (properties being `name` and `number`) at the top of the struct.
 
 ### Access Control
 
@@ -966,12 +949,12 @@ class Developer: Employee {
 ```
 
 - If you know for sure that your class should not support inheritance, you can mark it as **`final`**
-. This means the class itself can inherit from other things, but can’t be used to inherit *from*
- – no child class can use a final class as its parent.
+  . This means the class itself can inherit from other things, but can’t be used to inherit *from*
+   – no child class can use a final class as its parent.
 
 ### Adding initializers for classes
 
-Say you have a class: 
+Say you have a class:
 
 ```swift
 class Vehicle {
@@ -983,7 +966,7 @@ class Vehicle {
 }
 ```
 
-Now if you have a `Car` class that inherits from `Vehicle`, swift will refuse to build that class unless you tell it what the values for `isElectric` are. 
+Now if you have a `Car` class that inherits from `Vehicle`, swift will refuse to build that class unless you tell it what the values for `isElectric` are.
 
 - To do that we use `super`, when we initialize any instances of the child class
 
@@ -1012,34 +995,32 @@ protocol Vehicle {
 ```
 
 - Above we have:
-    - created a protocol with the keyword, with a name (it’s a type so has to be in capitals)
-    - inside we list all the methods we require
-    - as you can see the methods don’t actually contain function bodies, we are just specifying the name, parameters and return types.
+  - created a protocol with the keyword, with a name (it’s a type so has to be in capitals)
+  - inside we list all the methods we require
+  - as you can see the methods don’t actually contain function bodies, we are just specifying the name, parameters and return types.
 - Now we can match a `Car` struct that conforms to the `Vehicle` protocol:
-    
-    ```swift
-    struct Car: Vehicle {
-        func estimateTime(for distance: Int) -> Int {
-            distance / 50
-        }
-    
-        func travel(distance: Int) {
-            print("I'm driving \(distance)km.")
-        }
-    
-        func openSunroof() {
-            print("It's a nice day!")
-        }
-    }
-    ```
-    
-    - All methods that exist in Vehicle must exist in Car otherwise car doesn’t conform to the vehicle protocol.
-    - These methods must exist exactly the same, by that I mean they must have the same name, params and return types.
-    - The difference is the methods in `Car` actually do something, they are the implementations.
+  ```swift
+  struct Car: Vehicle {
+      func estimateTime(for distance: Int) -> Int {
+          distance / 50
+      }
 
-To understand why Protocols are useful you can look at the below example. But basically, they 
+      func travel(distance: Int) {
+          print("I'm driving \(distance)km.")
+      }
 
-If we create a function: 
+      func openSunroof() {
+          print("It's a nice day!")
+      }
+  }
+  ```
+  - All methods that exist in Vehicle must exist in Car otherwise car doesn’t conform to the vehicle protocol.
+  - These methods must exist exactly the same, by that I mean they must have the same name, params and return types.
+  - The difference is the methods in `Car` actually do something, they are the implementations.
+
+To understand why Protocols are useful you can look at the below example. But basically, they
+
+If we create a function:
 
 ```swift
 func commute(distance: Int, using vehicle: Car) {
@@ -1055,33 +1036,29 @@ commute(distance: 100, using: car)
 ```
 
 - This works, but it doesn’t add value. The real value comes from changing the `vechical` param to the `Vehicle` protocol. Because swift knows that any type that conforms to the Vehicle type must have both the `estimateTime()` and `travel()` methods.
-    - Why that is valuable is because it now allows you to call the function with any type of data as long as that data conforms to the Vehicle protocol.
-    - So rewrite it like so:
-    
-    ```swift
-    func commute(distance: Int, using vehicle: Vehicle) {
-    ...
-    }
-    ```
-    
+  - Why that is valuable is because it now allows you to call the function with any type of data as long as that data conforms to the Vehicle protocol.
+  - So rewrite it like so:
+  ```swift
+  func commute(distance: Int, using vehicle: Vehicle) {
+  ...
+  }
+  ```
 - That is powerful because now you can create a new struct that conforms to the Vehicle type like Bicycle
-    
-    ```swift
-    struct Bicycle: Vehicle {
-        func estimateTime(for distance: Int) -> Int {
-            distance / 10
-        }
-    
-        func travel(distance: Int) {
-            print("I'm cycling \(distance)km.")
-        }
-    }
-    
-    let bike = Bicycle()
-    commute(distance: 50, using: bike)
-    ```
-    
-    - Once we have that we could pass either `car` … //todo finish this once I’ve played with extensions in code
+  ```swift
+  struct Bicycle: Vehicle {
+      func estimateTime(for distance: Int) -> Int {
+          distance / 10
+      }
+
+      func travel(distance: Int) {
+          print("I'm cycling \(distance)km.")
+      }
+  }
+
+  let bike = Bicycle()
+  commute(distance: 50, using: bike)
+  ```
+  - Once we have that we could pass either `car` … //todo finish this once I’ve played with extensions in code
 
 Here is the summary by Paul for extensions, protocols and opaque types
 
@@ -1117,7 +1094,7 @@ Okay what are these lil fuckers `if let variable = variable { do something }`
 
 - this is called unwrapping and what it basically does is it creates a temporary variable that is only available inside the `{}` braces if the variable exists
 - what a mouthful - but it is easier to look at it this way: `if let unwrappedVariable = variable { do something with unwrappedVariable}`
-    - so if the `variable` exists then we create the `unwrappedVariable` and do something with it, we wan’t use it anywhere else in our code. Just in the local scope of the unwrapped varaible.
+  - so if the `variable` exists then we create the `unwrappedVariable` and do something with it, we wan’t use it anywhere else in our code. Just in the local scope of the unwrapped varaible.
 - the process of writing `if let variable = variable` is called shadowing and is a common pattern in swift
 
 ### Guard
@@ -1147,7 +1124,7 @@ guard let unwrapped = myVar else {
 - So, **`if let`** runs the code inside its braces if the optional had a value, and **`guard let`** runs the code inside its braces if the optional *didn’t* have a value.
 - what **`guard`**provides that is different from `if let` is the ability to check whether our program state is what we expect, and if it isn’t to bail out
 
-Using `guard` let’s us focus on the happy path, compare the two functions below: 
+Using `guard` let’s us focus on the happy path, compare the two functions below:
 
 ```swift
 func printMeaningOfLife() {
@@ -1168,7 +1145,7 @@ func printMeaningOfLife() {
 ```
 
 - The second one let’s use focus on the happy path, because it has an early exit if the `getMeaningOfLife` function doesn’t return any value.
-    - **`guard`** requires that we exit the current scope when it’s used, which in this case means we must return from the function if it fails. This is not optional: Swift won’t compile our code without the **`return`**.
+  - **`guard`** requires that we exit the current scope when it’s used, which in this case means we must return from the function if it fails. This is not optional: Swift won’t compile our code without the **`return`**.
 
 ### nil coalescing
 
@@ -1185,11 +1162,11 @@ let new = captains["Serenity"] ?? "N/A"
 ```
 
 - the nil coalescing (`??`) operator lets us provide a default value for an optional
-    - so if `"Serenity”` exists in `captains` it will return the value otherwise it will return `“N/A”`
+  - so if `"Serenity”` exists in `captains` it will return the value otherwise it will return `“N/A”`
 
 ### Optional chaining
 
-Works just like in Javascript, except you can use nil coalescing at the end to give a default value 
+Works just like in Javascript, except you can use nil coalescing at the end to give a default value
 
 ```swift
 struct Book {
@@ -1205,8 +1182,8 @@ print(author)
 # SwiftUI Stuff
 
 - **`struct ContentView: View`** creates a new struct called **`ContentView`**, saying that it conforms to the **`View`** protocol.
-    - **`View`** comes from SwiftUI and is the protocol that must be adopted by anything to be displayed on the screen, such as text, buttons, and images.
-    - The **`View`** protocol has only one requirement, which is that you have a computed property called **`body`** that returns **`some View`**
+  - **`View`** comes from SwiftUI and is the protocol that must be adopted by anything to be displayed on the screen, such as text, buttons, and images.
+  - The **`View`** protocol has only one requirement, which is that you have a computed property called **`body`** that returns **`some View`**
 - The **`body`** property has an interesting type: **`some View`**. This means it will return something that conforms to the **`View`** protocol, which is our layout. This means we expect some type to be returned, but we don't know what it will be, so we have you covered.
 - The **`ContentView_Previews`** struct conforms to the **`PreviewProvider`** protocol. This code is not part of the final app that goes to the App Store; it is only used by Xcode to display a preview of the UI design alongside the code.
 
@@ -1218,14 +1195,12 @@ Probably the most important reason for structs is that it forces us to think abo
 
 - It is important to note that **for SwiftUI developers, there is nothing behind our view.** Meaning that when you try to make white space behind font turn `red` you shouldn’t do that with weird hacks or tricks.
 - Therefore it is important to try to think in the mindset of **what you see is what you have.**
-    - if you have this mindset then instead of thinking how to I make the color behind the text box a different color you think how do I make the text box bigger. Practically it would look like this:
-        
-        ```swift
-        Text("Hello, world!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.red)
-        ```
-        
+  - if you have this mindset then instead of thinking how to I make the color behind the text box a different color you think how do I make the text box bigger. Practically it would look like this:
+    ```swift
+    Text("Hello, world!")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.red)
+    ```
 - all something needs to do in order to conform to the **`View`** protocol is to have a single computed property called **`body`** that returns **`some View`**
 
 ### Some View
@@ -1288,25 +1263,97 @@ struct ContentView: View {
 
 - What I’m not sure on yet is if, you put these in another file or if the convention is for these to live inside the parent.
 
+## Showing / hiding views
+
+### with transitions
+
+You can use the `transition` modifier to animate how a view is show and hidden
+
+- You need some state the toggles the change between whether the view is shown or hidden
+- You then wrap that view in the condition
+- when the condition changes the transition modifier will handle the change smoothly
+- You can also make the transition asymmetric meaning the transition effect will be different on show and hide
+
+```swift
+struct ContentView: View {
+	@State private var isShowingRed = false
+
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                isShowingRed.toggle()
+            }
+
+					// wrap the view in a condition
+          if isShowingRed {
+				    Rectangle()
+				        .fill(.red)
+				        .frame(width: 200, height: 200)
+								.transition(.asymmetric(insertion: .scale, removal: .opacity))
+					}
+    }
+}
+```
+
+### With sheet()
+
+******\*\*******`Sheet()`\*\* - you define the conditions under which a `sheet` should be shown for example a simple Bool.
+
+- Here is an example: ************\*\*\*\*************
+
+```swift
+struct SecondView: View {
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.locale) var locale
+
+    var body: some View {
+        Button("Dismiss") {
+            dismiss()
+        }
+        Spacer()
+        Spacer()
+        Text("Second View")
+        Text("Current Locale: \(locale.identifier)")
+        Spacer()
+    }
+}
+
+struct ContentView: View {
+    @State private var showingSheet = false
+
+    var body: some View {
+        Button("Show Sheet") {
+            showingSheet.toggle()
+        }.sheet(isPresented: $showingSheet) {
+            SecondView()
+        }
+    }
+}
+```
+
+- The `sheet` is shown using `isPresented` with a two way binding (`showingSheet`)
+- Because `sheet` is just a modifier, you can attached to a view.
+- To dismiss the sheet you can drag it down or we use the `@Environment` property wrapper and give it the value `dismiss` ([more on values for environment here](https://developer.apple.com/documentation/swiftui/environmentvalues))
+
 ## Stacks
 
 A way for swiftui’s View to return multiple things, you have three options that I know about now:
 
 1. `**HStack**` - horizontal
-2. `**VStack**` - vertical 
+2. `**VStack**` - vertical
 3. `**ZStack**` - zindex (depth)
-    1. **`ZStack`** draws its contents from top to bottom, back to front. This means if you have an image then some text **`ZStack`** will draw them in that order, placing the text on top of the image.
+   1. **`ZStack`** draws its contents from top to bottom, back to front. This means if you have an image then some text **`ZStack`** will draw them in that order, placing the text on top of the image.
 
 - I think of these kind of like flex box, in that `HStack` sets it to `flex-direction: column` and `VStack` sets it to `flex-direction` row. While ZStack let’s you play with z-indexs
 - Vertical and horizontal stacks automatically fit their content, and prefer to align themselves to the center of the available space. If you want to change that you can use one or more **`Spacer`** views to push the contents of your stack to one side.
 
 ## Temp useful components section
 
-*NB put these into sections that make more sense once I get a better idea of where they are commonly used
+\*NB put these into sections that make more sense once I get a better idea of where they are commonly used
 
-************`Picker`** - these are like a select input in html.  ************************
+****\*\*\*\*****`Picker`** - these are like a select input in html. **********\*\*************
 
-`**Stepper`** - simple - | + button takes text, value, range and steps
+`**Stepper`\*\* - simple - | + button takes text, value, range and steps
 
 ```swift
 @State private var sleepAmount = 8.0
@@ -1314,7 +1361,7 @@ A way for swiftui’s View to return multiple things, you have three options tha
 Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25) ****
 ```
 
-****`DatePicker`** - way for users to set a date (docs are good for these)
+\***\*`DatePicker`** - way for users to set a date (docs are good for these)
 
 ```swift
 @State private var wakeUp = Date.now
@@ -1348,7 +1395,7 @@ List {
 
 ### View with loops
 
-`**ForEach`** - lets you loop over values and create views, basic example: 
+`**ForEach`\*\* - lets you loop over values and create views, basic example:
 
 ```swift
 Form {
@@ -1357,7 +1404,7 @@ Form {
     }
 }
 
-// or shorthand closure syntax 
+// or shorthand closure syntax
 Form {
     ForEach(0 ..< 100) {
         Text("Row \($0)")
@@ -1367,7 +1414,7 @@ Form {
 ```
 
 - With for each loops we often need to pass **`id: \.self`** because SwiftUI needs to be able to identify every view on the screen uniquely, so it can detect when things change.
-    - It looks like this **`ForEach(students, id: \.self)`**
+  - It looks like this **`ForEach(students, id: \.self)`**
 
 ## Forms
 
@@ -1409,7 +1456,7 @@ var body: some View {
 
 ### Modifying state
 
-- (might need to move this)*property wrapper’s,* are special attributes we can place before our properties that effectively gives them super-powers.
+- (might need to move this)_property wrapper’s,_ are special attributes we can place before our properties that effectively gives them super-powers.
 
 ### @State
 
@@ -1417,7 +1464,7 @@ var body: some View {
 - **`@State`** allows values to be stored separately by SwiftUI in a place that *can* be modified.
 - **`@State`** is specifically designed for simple properties that are stored in one view. As a result, Apple recommends we add **`private`** access control to those properties, like this: **`@State private var tapCount = 0`**
 
-example: 
+example:
 
 ```swift
 struct ContentView: View {
@@ -1431,9 +1478,13 @@ struct ContentView: View {
 }
 ```
 
-- **Why self?** the use of `self`  is necessary because inside the closure of the button, **`tapCount`** is a property of **`self`**, and without using **`self`**, Swift would assume you're trying to access a local variable instead of a property. By using **`self`**, you can modify the **`tapCount`** property of the struct, which updates the view when the property changes.
+- **Why self?** the use of `self` is necessary because inside the closure of the button, **`tapCount`** is a property of **`self`**, and without using **`self`**, Swift would assume you're trying to access a local variable instead of a property. By using **`self`**, you can modify the **`tapCount`** property of the struct, which updates the view when the property changes.
 
-### Binding state with *two-way binding*
+The `**State`\*\* property wrapper is designed for simple that that is local to the current view, meaning you can’t share that data between views.
+
+- This is where you should use `classes`, because classes have multiple things that can point to the same value and classes don’t need the `mutating` keyword before methods that change their properties because you can change the props of constant classes.
+
+### Binding state with _two-way binding_
 
 - Two-way binding in SwiftUI is a mechanism that allows you to synchronize the state of a view with its associated data model. In other words, it allows changes made to the view to be reflected in the model and vice versa.
 
@@ -1448,26 +1499,59 @@ struct ContentView: View {
 }
 ```
 
-- Here, the **`TextField`** view takes a **`Binding`** to a **`String`** value, which is declared as a **`State`** property in the parent **`ContentView`**. **********The `$` creates the two way binding between the State property and the view.**
-- But notice how we use `name` and not `$name` in the Text view that is because we don’t want the two way binding here, we just want to ****read**** the value.
+- Here, the **`TextField`** view takes a **`Binding`** to a **`String`** value, which is declared as a **`State`** property in the parent **`ContentView`**. ****\*\*****The `$` creates the two way binding between the State property and the view.\*\*
+- But notice how we use `name` and not `$name` in the Text view that is because we don’t want the two way binding here, we just want to \***\*read\*\*** the value.
+
+### Sharing State across views
+
+In order to share state across views swift gives us three property wrappers that are useful,
+
+1. **`@StateObject`**
+2. **`@ObservedObject`**
+3. **`@EnvironmentObject`**
+
+- **`@Published`** property observer, broadcasts out to our application whenever any changes to a `var` with this observer have been changed and thus any views using it should update.
+  - The second part of this is we need to let the views know which classes might announce changes, you do that with the **********\*\***********`**@StateObject`\*\* property wrapper.
+  - The third part is we need to change the protocol of our class because the `@StateObject` property wrapper only conforms to the `ObservableObject` protocol.
+  Here is working example, where our User class will broadcast any changes to our ContentView and other views that have the variables `firstName` and `lastName`
+  ```swift
+  class User: ObservableObject {
+      @Published var firstName = "Bilbo"
+      @Published var lastName = "Baggins"
+  }
+
+  struct ContentView: View {
+  		@StateObject var user = User()
+
+      var body: some View {
+          VStack {
+              Text("Your name is \(user.firstName) \(user.lastName).")
+
+              TextField("First name", text: $user.firstName)
+              TextField("Last name", text: $user.lastName)
+          }
+      }
+  }
+  ```
+- There is one final catch here and it is an important one. The **`@StateObject`** tells swift we are creating a new class instance, and that swift should watch for any change announcements. **However**, that **should only be used when we creating the object** like we are with our `**User`\*\* instance.
+  - When you want to use a class instance elsewhere, for example you created it on view A but also want to use it on view B you use the **`@ObservedObject`**.
+  - So the big difference is when creating use **`@StateObject`** when using on different view use **`@ObservedObject`** (confusingly it is named ObservedObject, but the property wrapper is Observ**able**Oject.
 
 ## Colors and Frames
 
 - **`Color.primary`** - is the default color of text, will be either black or white depending on user’s device settings
 - **`Color.secondary`** - also either black or white depending one the device, but has slight transparency so that a little color behind shines through
 - You can create specific colors with rgb `Color(red: 1, green: 0.2, blue: 0)`
-    - they take values from 0 - 1
+  - they take values from 0 - 1
 - Frames are like `divs` - you can set width, height and other things and they cover that space.
-    
-    ```swift
-    VStack {
-    	Color.red
-        .frame(width: 200, height: 200)	
-    }
-    ```
-    
-- If you were to set the body to `Color.red`, you’d notice that there is a white bar at the top and the bottom of the screen, the space where it is red is called the *safe area.* Apple deliberately does this so you don’t put important UI elements of your app in the status bar etc.
-    - If you do want your content to go under the safe area. You can use the `.ignoreSafeArea()` modifier
+  ```swift
+  VStack {
+  	Color.red
+      .frame(width: 200, height: 200)
+  }
+  ```
+- If you were to set the body to `Color.red`, you’d notice that there is a white bar at the top and the bottom of the screen, the space where it is red is called the _safe area._ Apple deliberately does this so you don’t put important UI elements of your app in the status bar etc.
+  - If you do want your content to go under the safe area. You can use the `.ignoreSafeArea()` modifier
 - the `background()` modifier also accepts `materials` which allows you to create some depth affects
 
 ### Gradients
@@ -1484,56 +1568,50 @@ A basic SwiftUI alert has a title and button that dismisses it.
 
 - You present an alert with `myAlert.show()`
 - Because our “views are a function of our state”, you need to setup some state that determines if the user should see the alert or not e.g. `@State **private** **var** showingAlert = false`
-    
-    ```swift
-    @State private var showingAlert = false
-    
-        var body: some View {
-            Button("Show Alert") {
-                showingAlert = true
-            }
-            .alert("Important message", isPresented: $showingAlert) {
-                Button("OK") { }
-            }
-        }
-    ```
-    
-    - I think swift automatically sets `showingAlert` to false if you press the “OK” button on the alert, because all actions in an alert dismiss the alert after the action runs.
+  ```swift
+  @State private var showingAlert = false
+
+      var body: some View {
+          Button("Show Alert") {
+              showingAlert = true
+          }
+          .alert("Important message", isPresented: $showingAlert) {
+              Button("OK") { }
+          }
+      }
+  ```
+  - I think swift automatically sets `showingAlert` to false if you press the “OK” button on the alert, because all actions in an alert dismiss the alert after the action runs.
 
 ## Modifiers
 
 - When we add a modifier to a view, we are creating a new view with that change applied
 - So order matters with modifiers, take the below example
-    
-    ```swift
-    Button("Hello, world!") {
-        // do nothing
-    }    
-    .background(.red)
-    .frame(width: 200, height: 200)
-    //.border(Color.black, width: 1)
-    ```
-    
+  ```swift
+  Button("Hello, world!") {
+      // do nothing
+  }
+  .background(.red)
+  .frame(width: 200, height: 200)
+  //.border(Color.black, width: 1)
+  ```
 - The above produces a small red box and then a white 200x200 frame, if you add `.border(Color.black, width: 1)` you’ll see the frame.
 - To crystalize this, have a look at what happens when you use swifts `type(:of)` method
-    
-    ```swift
-    Button("Hello, world!") {
-        print(type(of: self.body))
-    }    
-    .background(.red)
-    .frame(width: 200, height: 200)
-    ```
-    
+  ```swift
+  Button("Hello, world!") {
+      print(type(of: self.body))
+  }
+  .background(.red)
+  .frame(width: 200, height: 200)
+  ```
 - The above outputs **`ModifiedContent<ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>>, _FrameLayout>`**
-    - Things to notice here are:
-        - every time you use a modifier swift applies that modifier using generics `ModifiedContent<OurThing, OurModifier>`
-        - What is happening above is they are getting stacked, **`<ModifiedContent<ModifiedContent`**
-    - To read it you need to work from the inner most type, out. So the inner most is **`ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>`**: our button has some text with a background color applied. Then around that we have **`ModifiedContent<…, _FrameLayout>`**, which takes our first view (button + background color) and gives it a larger frame.
+  - Things to notice here are:
+    - every time you use a modifier swift applies that modifier using generics `ModifiedContent<OurThing, OurModifier>`
+    - What is happening above is they are getting stacked, **`<ModifiedContent<ModifiedContent`**
+  - To read it you need to work from the inner most type, out. So the inner most is **`ModifiedContent<Button<Text>, _BackgroundStyleModifier<Color>`**: our button has some text with a background color applied. Then around that we have **`ModifiedContent<…, _FrameLayout>`**, which takes our first view (button + background color) and gives it a larger frame.
 
 ### custom modifiers
 
-Using the `VIewModifier` protocol, you can create your own custom modifiers. 
+Using the `VIewModifier` protocol, you can create your own custom modifiers.
 
 ```swift
 struct Title: ViewModifier {
@@ -1568,21 +1646,19 @@ Text("Hello World")
 
 - You can create a basic `Date` type with `Date.now` , which gives you the date and time for that exact moment
 - Swift lets you get more general by using the `DateComponents`
-    - This lets you read or write specific parts of a date rather than the whole thing
-    
-    ```swift
-    var components = DateComponents()
-    components.hour = 8
-    components.minute = 0
-    let date = Calendar.current.date(from: components) ?? Date.now // use nil coalescing 
-    // because date(from:) returns an optional date
-    ```
-    
-    - Above we representing 8am today
+  - This lets you read or write specific parts of a date rather than the whole thing
+  ```swift
+  var components = DateComponents()
+  components.hour = 8
+  components.minute = 0
+  let date = Calendar.current.date(from: components) ?? Date.now // use nil coalescing
+  // because date(from:) returns an optional date
+  ```
+  - Above we representing 8am today
 
 ## URLs
 
-You can access files in your bundle using the `Bundle.main.url()` method. 
+You can access files in your bundle using the `Bundle.main.url()` method.
 
 - If the file exists it is sent back to us otherwise it will return `nil`
 
@@ -1606,7 +1682,7 @@ if let fileContents = try? String(contentsOf: fileURL) {
 
 You can use the `animation` modifier to smoothly transition changes.
 
-- It takes a animation type like “*ease-in ease-out”* (default)
+- It takes a animation type like “_ease-in ease-out”_ (default)
 - It also has a value that it listens for, so it knows when to animate so in the example below it listens for when the `animationAmount` property changes
 
 ```swift
@@ -1629,19 +1705,17 @@ struct ContentView: View {
 ```
 
 - When the button gets tapped its action is to add on to `animationAmount` which updates the property, the animation modifier is listening for that and thus it smoothly scales it up and applies blur.
-    - without the `animationModifier` the `blur` and `scaleEffect` would appear more stuttered
+  - without the `animationModifier` the `blur` and `scaleEffect` would appear more stuttered
 - You would call these implicit animations because they always need to listen for a value to change
 
 A really cool feature is that swiftUI has spring animations built in
 
 - you can use the `interpolatingSpring` modifier inside of the `animation` modifier
-    
-    ```swift
-    .animation(.interpolatingSpring(stiffness: 50, damping: 1), value: animationAmount)
-    ```
-    
-    - `stiffness` of the spring which sets its initial velocity when the animation starts
-    - `damping` how fast the animation should be “`damped`” lower values cause the spring to bounce back and forth for longer.
+  ```swift
+  .animation(.interpolatingSpring(stiffness: 50, damping: 1), value: animationAmount)
+  ```
+  - `stiffness` of the spring which sets its initial velocity when the animation starts
+  - `damping` how fast the animation should be “`damped`” lower values cause the spring to bounce back and forth for longer.
 
 You can also set `duration` on the animation
 
@@ -1650,7 +1724,7 @@ You can also set `duration` on the animation
 ```
 
 - When you pass the duration argument you are actually creating a new instance of a `Animation` struct that has it’s own modifiers
-    - so you can attach modifiers like `delay` or `repeatCount` directly to animation
+  - so you can attach modifiers like `delay` or `repeatCount` directly to animation
 
 ```swift
 .animation(
@@ -1659,7 +1733,7 @@ You can also set `duration` on the animation
     value: animationAmount
 )
 
-// or 
+// or
 
 .animation(
     .easeInOut(duration: 1)
@@ -1697,75 +1771,105 @@ struct ContentView: View {
 
 ### Explicit animations
 
-**Above was all implicit animations*
+\*_Above was all implicit animations_
 
 You can explicitly tell swiftui to animate changes occurring as the result of a state change
 
 - Using the `withAnimation` closure, swiftUI ensures any changes resulting from the new state will automatically be animated
-    
-    ```swift
-    struct ContentView: View {
-        @State private var animationAmount = 0.0
-    
-        var body: some View {
-            Button("Tap Me") {
-                withAnimation {
-                    animationAmount += 360
-                }
-            }
-            .padding(50)
-            .background(.red)
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
-        }
-    }
-    ```
-    
-    - so above you’ll notice there is no `.animation` modifier, rather explicitly saying when the button is tapped add 360 to the animationAmount with an animation. And because animation amount is bound to the `rotation3DEffect` it is animated.
-    - You could swap `rotation3DEffect` with the `scaleEffect` we’ve been using and it would still work
-        
-        ```swift
-        Button("Tap Me") {
-            withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
-                animationAmount += 1
-        	  }
+  ```swift
+  struct ContentView: View {
+      @State private var animationAmount = 0.0
+
+      var body: some View {
+          Button("Tap Me") {
+              withAnimation {
+                  animationAmount += 360
+              }
           }
           .padding(50)
           .background(.red)
           .foregroundColor(.white)
           .clipShape(Circle())
-          .scaleEffect(animationAmount)
-        }
-        ```
-        
+          .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
+      }
+  }
+  ```
+  - so above you’ll notice there is no `.animation` modifier, rather explicitly saying when the button is tapped add 360 to the animationAmount with an animation. And because animation amount is bound to the `rotation3DEffect` it is animated.
+  - You could swap `rotation3DEffect` with the `scaleEffect` we’ve been using and it would still work
+    ```swift
+    Button("Tap Me") {
+        withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+            animationAmount += 1
+    	  }
+      }
+      .padding(50)
+      .background(.red)
+      .foregroundColor(.white)
+      .clipShape(Circle())
+      .scaleEffect(animationAmount)
+    }
+    ```
 
-## Showing / hiding views with transitions
+## Storing User Settings
 
-You can use the `transition` modifier to animate how a view is show and hidden
+### UserDefaults
 
-- You need some state the toggles the change between whether the view is shown or hidden
-- You then wrap that view in the condition
-- when the condition changes the transition modifier will handle the change smoothly
-- You can also make the transition asymmetric meaning the transition effect will be different on show and hide
+**`UserDefaults`** is perfect for storing things like when the user last launched the app, which news story they last read, or other passively collected information.
+
+- UserDefaults is are often wrapped up in a property wrapper called `@AppStorage`
+
+You can store UserDefault like so:
 
 ```swift
 struct ContentView: View {
-	@State private var isShowingRed = false
+		// getter
+    @State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
 
     var body: some View {
-        VStack {
-            Button("Tap Me") {
-                isShowingRed.toggle()
-            }
-					
-					// wrap the view in a condition
-          if isShowingRed {
-				    Rectangle()
-				        .fill(.red)
-				        .frame(width: 200, height: 200)
-								.transition(.asymmetric(insertion: .scale, removal: .opacity))
-					}
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+						// setter
+            UserDefaults.standard.set(self.tapCount, forKey: "Tap")
+        }
     }
 }
 ```
+
+Or you could store like this, where we are accessing `UserDefaults` through the `@AppStorage` property wrapper
+
+```swift
+struct ContentView: View {
+    @AppStorage("tapCount") private var tapCount = 0
+
+    var body: some View {
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+        }
+    }
+}
+```
+
+- It reminds me of getting and setting with local storage. You use the `set` method with a key name and value in the first example or you just use the. key name in the second example. But to get it you just give it the key name.
+
+Sometimes your data is going to be more complexed than `@AppStorage` can handle this is when you need to use `UserDefaults`, complexity could be as simple as having a User data structure that has string variables.
+
+- Swift gives us the `Codable` protocol that allows us to archive and unarchive this data.
+  ```swift
+  struct User: Codable {
+      let firstName: String
+      let lastName: String
+  }
+  ```
+  - To archive the data we need to use the type `JSONEncoder`, it takes something that conforms to the `Codable` protocol and sends it back as JSON.
+  ```swift
+  @State private var user = User(firstName: "Taylor", lastName: "Swift")
+
+  Button("Save User") {
+      let encoder = JSONEncoder()
+
+      if let data = try? encoder.encode(user) {
+          UserDefaults.standard.set(data, forKey: "UserData")
+      }
+  }
+  ```
+  - Because `encode()` might throw errors, you need to call it with `try` or `try?`
