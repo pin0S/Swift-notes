@@ -1,6 +1,6 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 37**
+**Up to: Day 38**
 
 ### Notes:
 
@@ -9,6 +9,8 @@
 \*Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
 
 \*added xCode tips at the top
+
+\*as I progress through (currently at day 38 as I write this) I find myself slowing down. I think this is a good thing as I’m having to really test if I understand what is going on in the code. ChatGPT has been really helpful to use as a coach, when I’m unsure of something I can often as it to explain it to me and give me other examples.
 
 ## Fun facts
 
@@ -1535,7 +1537,16 @@ In order to share state across views swift gives us three property wrappers that
   ```
 - There is one final catch here and it is an important one. The **`@StateObject`** tells swift we are creating a new class instance, and that swift should watch for any change announcements. **However**, that **should only be used when we creating the object** like we are with our `**User`\*\* instance.
   - When you want to use a class instance elsewhere, for example you created it on view A but also want to use it on view B you use the **`@ObservedObject`**.
-  - So the big difference is when creating use **`@StateObject`** when using on different view use **`@ObservedObject`** (confusingly it is named ObservedObject, but the property wrapper is Observ**able**Oject.
+  - So the big difference is when creating use **`@StateObject`** when using on different view use **`@ObservedObject`** (confusingly it is named ObservedObject, but the property wrapper is Observ**able**Object.
+    ```swift
+    // on the main view you have
+    @StateObject var expenses = Expenses()
+
+    // on view b you have
+    @ObservedObject var expenses: Expenses
+    ```
+    - The `@StateObject` here tells swift we are creating a new class instance of the Expenses class (which conforms to the ObservableObject protocol) on the main view
+    - The `@ObservedObject` observes any changes to the instance of that object on view B
 
 ## Colors and Frames
 
@@ -1873,3 +1884,43 @@ Sometimes your data is going to be more complexed than `@AppStorage` can handle 
   }
   ```
   - Because `encode()` might throw errors, you need to call it with `try` or `try?`
+  - To read the data back out we need to use `JSONDecoder`
+
+## Protocol conformances
+
+Protocol conformances refer to the implementation of protocols by types, which allows those types to adopt the behavior and requirements specified by the protocol.
+
+- **********\*\***********`**Identifiable**`**********\*\*********** - this type can be uniquely identified. It’s only requirement is that there must be a property called id that contains a unique identifier.
+  - This guarantees that your items are identifiable uniquely. Meaning you don’t need to use the `id: \.self` in a ForEach you can just do like below:
+  ```swift
+  struct ExpenseItem: Identifiable {
+      let id = UUID()
+      let name: String
+      let type: String
+      let amount: Int
+  }
+
+  ...some view
+  ForEach(expenses.items) { item in
+      Text(item.name)
+  }
+  ```
+
+## self
+
+As with any programing language `self` does my head in. In swift here are some examples I’ve come up against that I didn’t know I need to use `self` **but you do**
+
+```swift
+init() {
+    if let savedItems = UserDefaults.standard.data(forKey: "Items") {
+        if let decodedItems = try? JSONDecoder().decode([ExpenseItem]**.self,** from: savedItems) {
+            items = decodedItems
+            return
+        }
+    }
+
+    items = []
+}
+```
+
+- On line three we have `self` right after the array of `ExpenseItem`, without self here swift doesn’t know what you mean. It thinks it could be a number of things like making a copy of the class, were we planning on referencing a static property or method? Do we want to create an instance of a class blah, blah, blah. So to avoid confusing the shit out of swift you say that you are referring to the type itself (know as the type object so in this cases it would be `ExpenseItem`) by writing `.self` after it.
