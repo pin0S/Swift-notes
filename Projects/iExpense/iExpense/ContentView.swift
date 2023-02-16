@@ -39,27 +39,43 @@ struct ContentView: View {
     @StateObject var expenses = Expenses() 
     @State private var showingAddExpense = false
     
+    private var localCurrency: FloatingPointFormatStyle<Double>.Currency = .currency(code: Locale.current.currency?.identifier ?? "USD")
+    
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(expenses.items) { item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
+                    Section {
+                        if item.type == "personal" {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.name)
+                                        .font(.headline)
+                                    Text(item.type)
+                                }
+                                
+                                Spacer()
+                                if item.amount < 10 {
+                                    Text(item.amount, format: localCurrency)
+                                        .background(.green)
+                                } else if item.amount < 100 {
+                                    Text(item.amount, format: localCurrency)
+                                        .background(.yellow)
+                                } else {
+                                    Text(item.amount, format: localCurrency)
+                                        .background(.red)
+                                }
+                            }
                         }
-
-                        Spacer()
-                        Text(item.amount, format: .currency(code: "USD"))
                     }
+                    
+                }.onDelete(perform: removeItems)
+            }
+                .navigationTitle("iExpense")
+                .sheet(isPresented: $showingAddExpense) {
+                    AddView(expenses: expenses)
                 }
-                .onDelete(perform: removeItems)
-            }
-            .navigationTitle("iExpense")
-            .sheet(isPresented: $showingAddExpense) {
-                AddView(expenses: expenses)
-            }
                 .toolbar {
                     Button {
                         showingAddExpense = true
@@ -67,14 +83,14 @@ struct ContentView: View {
                         Image(systemName: "plus")
                     }
                 }
+                
             
         }
+        
+        func removeItems(at offsets: IndexSet) {
+            expenses.items.remove(atOffsets: offsets)
+        }
     }
-    
-    func removeItems(at offsets: IndexSet) {
-        expenses.items.remove(atOffsets: offsets)
-    }
-
 }
 
 struct ContentView_Previews: PreviewProvider {

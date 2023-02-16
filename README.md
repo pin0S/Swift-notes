@@ -1,16 +1,13 @@
 # 100 Days of SwiftUI
 
-**Up to: Day 38**
+**Up to: Day 40**
 
 ### Notes:
 
-\*removed days, so I can better put data into categories.
-
-\*Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
-
-\*added xCode tips at the top
-
-\*as I progress through (currently at day 38 as I write this) I find myself slowing down. I think this is a good thing as I’m having to really test if I understand what is going on in the code. ChatGPT has been really helpful to use as a coach, when I’m unsure of something I can often as it to explain it to me and give me other examples.
+*removed days, so I can better put data into categories.
+*Fark me day 13 had so much content, I couldn’t be bothered taking notes. I’ll add notes as I come across protocols in the projects section (just going to let it marinate for now)
+*added xCode tips at the top
+*as I progress through (currently at day 38 as I write this) I find myself slowing down. I think this is a good thing as I’m having to really test if I understand what is going on in the code. ChatGPT has been really helpful to use as a coach, when I’m unsure of something I can often as it to explain it to me and give me other examples.
 
 ## Fun facts
 
@@ -1349,6 +1346,73 @@ A way for swiftui’s View to return multiple things, you have three options tha
 - I think of these kind of like flex box, in that `HStack` sets it to `flex-direction: column` and `VStack` sets it to `flex-direction` row. While ZStack let’s you play with z-indexs
 - Vertical and horizontal stacks automatically fit their content, and prefer to align themselves to the center of the available space. If you want to change that you can use one or more **`Spacer`** views to push the contents of your stack to one side.
 
+## Grids
+
+You can create grid views with two views:
+
+1. ********\*\*********`**LazyVStack**`********\*\*********
+   1. `columns:` is the parameter
+2. **`LazyHStack`**
+   1. `rows:` is the parameter
+
+To create a grid first you need to define the rows and columns you want.
+
+- You can do it explicitly like this:
+  ```swift
+  let layout = [
+      GridItem(.fixed(80)),
+      GridItem(.fixed(80)),
+      GridItem(.fixed(80))
+  ]
+  ```
+- Or you can do it implicitly using the `.adaptive` modifier
+  ```swift
+  let layout = [
+      GridItem(.adaptive(minimum: 80)),
+  ]
+  ```
+
+Once you have the layout you can then create the grid, by passing the `LazyVGird` or `HGrid` the layout.
+
+```swift
+ScrollView {
+    LazyVGrid(columns: layout) {
+        ForEach(0..<1000) {
+            Text("Item \($0)")
+        }
+    }
+}
+```
+
+## ScrollView
+
+- can scroll horizontally and vertically or both
+- common pattern is to make the whole area scrollable not just the content, to do this use the `.frame` modifier with the argument `maxWidth: .infinity`
+  ```swift
+  ScrollView {
+    VStack(spacing: 10) {
+        ForEach(0..<100) {
+            Text("Item \($0)")
+                .font(.title)
+        }
+    }
+    .frame(maxWidth: .infinity)
+  }
+  ```
+- When you add views to a `ScrollView` they get created immediately, to avoid this you can use a `LazyVStack` or `LazyHStack` to load content on-demand meaning they won’t create the views until they are actually shown on the screen
+  ```swift
+  ScrollView {
+    LazyVStack(spacing: 10) {
+        ForEach(0..<100) {
+            CustomText("Item \($0)")
+                .font(.title)
+        }
+    }
+    .frame(maxWidth: .infinity)
+  }
+  ```
+- To make a `ScrollView` horizontal you just need to pass it `.horizontal` = `ScrollView(.horizontal) {`
+
 ## Temp useful components section
 
 \*NB put these into sections that make more sense once I get a better idea of where they are commonly used
@@ -1453,6 +1517,28 @@ var body: some View {
 ```
 
 - You place the **`.navigationTitle()`** modifier on the closing brackets of the last child, so it would be on the `Form` in the above example
+
+- `sheet()` vs `NavigationLink`, should be used for different purposes depending on the information you are showing
+  - `NavigationLink` is for showing details about the user’s selection, like you’re digging deeper into a topic.
+  - `sheet()` is for showing unrelated content, such as settings or a compose window.
+
+### NavigationLink
+
+**`NavigationLink`** - gives the destination you want the user to go. They should exist within the scope of a `NavigationView`
+
+- The below will literally take you to a new (“screen”) view saying “Detail View”
+
+```swift
+NavigationView {
+    NavigationLink {
+        Text("Detail View")
+    } label: {
+        Text("Hello, world!")
+            .padding()
+    }
+    .navigationTitle("SwiftUI")
+}
+```
 
 ## State
 
@@ -1905,6 +1991,29 @@ Protocol conformances refer to the implementation of protocols by types, which a
       Text(item.name)
   }
   ```
+- **`Codable`** protocol - used to serialize and deserialize (encode / decode) data from different formats such as JSON.
+  - It is actually a type alias for the combo of `Encodable` and `Decodable` protocols hence why you can encode / decode with it
+  ```swift
+  struct Person: Codable {
+      var name: String
+      var age: Int
+  }
+
+  // Create a person instance
+  let person = Person(name: "Alice", age: 30)
+
+  // Encode the person to JSON data
+  let jsonEncoder = JSONEncoder()
+  let jsonData = try jsonEncoder.encode(person)
+
+  // Decode the person from JSON data
+  let jsonDecoder = JSONDecoder()
+  let decodedPerson = try jsonDecoder.decode(Person.self, from: jsonData)
+
+  // Print the decoded person
+  print(decodedPerson)
+  ```
+  - Note in the example above we need to provide `Person.self` to the decoder, this is in order to tell it what type to decode because the decoded data doesn’t have explicit type info, hence we need to provide it.
 
 ## self
 
@@ -1924,3 +2033,63 @@ init() {
 ```
 
 - On line three we have `self` right after the array of `ExpenseItem`, without self here swift doesn’t know what you mean. It thinks it could be a number of things like making a copy of the class, were we planning on referencing a static property or method? Do we want to create an instance of a class blah, blah, blah. So to avoid confusing the shit out of swift you say that you are referring to the type itself (know as the type object so in this cases it would be `ExpenseItem`) by writing `.self` after it.
+
+## Images
+
+\*think this section will need refactoring once I’ve gone through all the modules on it
+
+- use the `Image` view in swift
+
+### Resizing
+
+Resize with `frame`:
+
+- this won’t work, all it does is set the frame
+  ```swift
+  Image("Example")
+      .frame(width: 300, height: 300)
+  ```
+- this works but it doesn’t resize the image it just cuts it to only show what is within the frame
+  ```swift
+  Image("Example")
+      .frame(width: 300, height: 300)
+      .clipped()
+  ```
+- this will resize as you expect, but makes it looked distorted, because we are possibly forcing a rectangle to be a square.
+  ```swift
+  Image("Example")
+      .resizable()
+      .frame(width: 300, height: 300)
+  ```
+
+the **`scaledToFit()`** and **`scaledToFill()`** modifiers will help us scale images proportionally
+
+- toFit = the entire image will fit inside the container, even though it could mean leaving parts of the view empty (have a look with border modifier as the last mod)
+  ```swift
+  Image("example")
+    .resizable()
+    .scaledToFit()
+    .frame(width: 300, height: 300)
+    .border(.indigo)
+  }
+  ```
+- toFill = means the view will have no empty parts even if the means for of the image is outside the container
+  ```swift
+  Image("example")
+    .resizable()
+    .scaledToFill()
+    .frame(width: 300, height: 300)
+    .border(.indigo)
+  }
+  ```
+
+resizing with **`GeometryReader`**
+
+```swift
+GeometryReader { geo in
+    Image("Example")
+        .resizable()
+        .scaledToFit()
+        .frame(width: geo.size.width * 0.8, height: 300)
+}
+```
